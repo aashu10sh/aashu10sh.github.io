@@ -1,0 +1,37 @@
+base_url = "https://aashut10sh.github.io"
+title = "aashu10sh"
+build_search_index = true
+generate_feed = true
+minify_html = true
+
+theme = "apollo"
+
+[markdown]
+highlight_code = true
+highlight_theme = "ayu-dark"
+
+[extra]
+use_cdn = false
+theme = "toggle"
+comment=false
+
+menu = [
+    { name = "/posts", url = "/posts", weight = 1 },
+    { name = "/projects", url = "/projects", weight = 2 },
+    # { name= "/talks", url= "/talks", weight= 3 },
+    { name = "/about", url = "/about", weight = 4 },
+]
+
+socials = [
+    { name = "twitter", url = "https://twitter.com/a5hu7osh", icon = "twitter" },
+    { name = "github", url = "https://github.com/aashut10sh/", icon = "github" },
+]
+
+[extra.analytics]
+enabled = true
+
+[extra.analytics.goatcounter]
+user = "not-matthias"
+
+[extra.analytics.umami]
+website_id = "74344cd8-1e87-4c38-8acd-f96049b8f07e"
