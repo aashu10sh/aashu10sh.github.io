@@ -1,7 +1,7 @@
 base_url = "https://aashu10sh.github.io"
 title = "aashu10sh"
 build_search_index = true
-generate_feed = true
+generate_feeds = true
 minify_html = true
 
 theme = "apollo"
