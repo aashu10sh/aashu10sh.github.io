@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>aashu10sh</title>
+    <link rel="self" type="application/atom+xml" href="https://aashu10sh.github.io/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://aashu10sh.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-09-12T00:00:00+00:00</updated>
+    <id>https://aashu10sh.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>My thoughts on Bukowski&#x27;s &#x27;Post Office&#x27;</title>
+        <published>2024-09-12T00:00:00+00:00</published>
+        <updated>2024-09-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/posts/post-office/"/>
+        <id>https://aashu10sh.github.io/posts/post-office/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/posts/post-office/">&lt;h1 id=&quot;prologue&quot;&gt;Prologue&lt;&#x2F;h1&gt;
+&lt;p&gt;I learned about ol man Bukowski when I came across a video titled &lt;code&gt;&quot;Bluebird by Charles Bukowski&quot;&lt;&#x2F;code&gt;. It had the picture of Adrien Brody looking all melancholic in the thumbnail, I thought &#x27;what the hell&#x27; and gave it a shot. &quot;where was this all my life&quot; I asked myself after the poem. The poem was incredible, It was so simple to digest yet it had many layers that challenged many dark themes in our lives. I looked up more stuff on Old Man Bukowski.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;discovery&quot;&gt;Discovery&lt;&#x2F;h1&gt;
+&lt;p&gt;Man I listened ( i am a bum, i look at videos that recite his poems:D instead of reading them ) so many bukowski poems after that. Each so different than the last and yet equally as dark and crude. The poem &#x27;Hell is a Lonely Place&#x27; still gives me goosebumps. I think I showed off my new found Bukowski poems to all my close friends. Some understood, some called me strange. I looked at some of his interviews next, The one where he talks about his first woman stood out the most to me. I was perplexed, here is an ugly old man drinking booze, shouting profanity and bragging about a terrible thing he did. Most would cower, hide and prefer not to talk about such things but not bukowski, old man was as naked as a new born child. Telling it just the way it was no spices, not biasness, noting, just experience and reflection. I liked that. Next time I went to Books Mandala I bought myself the Post Office, I wanted to read his best work and apparently this was it.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-story&quot;&gt;The Story&lt;&#x2F;h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Before I move on to the review, the introduction to the book by Niall Griffiths is bloody brilliant. Bukowski would approve&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;In the first part of the book we are introduced to the drunken, dirty and womanizing Henry Chinaski as he lands a job as a substitute mailman in the post office. We&#x27;re also introduced to Betty, his girlfriend at the time. In this part of the book we learn about the life at the post office, Henry is fairly young here, He&#x27;s always cheating on Betty, getting drunk and rebelling against his boss. He&#x27;s immature, impulsive, rude and violent at times. He&#x27;s always gambling his money away at the tracks.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust and C++: How to migrate and work together</title>
+        <published>2023-10-24T00:00:00+00:00</published>
+        <updated>2023-10-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/rust-for-cpp-devs/"/>
+        <id>https://aashu10sh.github.io/talks/rust-for-cpp-devs/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/rust-for-cpp-devs/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>From Zero to Production with Rust</title>
+        <published>2023-01-26T00:00:00+00:00</published>
+        <updated>2023-01-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/zero-to-production-with-rust/"/>
+        <id>https://aashu10sh.github.io/talks/zero-to-production-with-rust/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/zero-to-production-with-rust/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Game Hacking with Rust</title>
+        <published>2023-01-13T00:00:00+00:00</published>
+        <updated>2023-01-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/game-hacking-with-rust/"/>
+        <id>https://aashu10sh.github.io/talks/game-hacking-with-rust/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/game-hacking-with-rust/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introduction to AI</title>
+        <published>2022-11-22T00:00:00+00:00</published>
+        <updated>2022-11-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/introduction-to-ai/"/>
+        <id>https://aashu10sh.github.io/talks/introduction-to-ai/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/introduction-to-ai/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AMD Hypervisor with Rust</title>
+        <published>2022-10-01T00:00:00+00:00</published>
+        <updated>2022-10-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/amd-hypervisor/"/>
+        <id>https://aashu10sh.github.io/talks/amd-hypervisor/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/amd-hypervisor/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introduction to Rust</title>
+        <published>2022-06-23T00:00:00+00:00</published>
+        <updated>2022-06-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/introduction-to-rust/"/>
+        <id>https://aashu10sh.github.io/talks/introduction-to-rust/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/introduction-to-rust/"></content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Kernel Driver with Rust</title>
+        <published>2020-10-08T00:00:00+00:00</published>
+        <updated>2020-10-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://aashu10sh.github.io/talks/kernel-driver-with-rust/"/>
+        <id>https://aashu10sh.github.io/talks/kernel-driver-with-rust/</id>
+        
+        <content type="html" xml:base="https://aashu10sh.github.io/talks/kernel-driver-with-rust/"></content>
+        
+    </entry>
+</feed>
