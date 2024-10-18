@@ -1,5 +1,5 @@
 +++
-title = "Projects"
-sort_by = "weight"
-template = "cards.html"
+title = "aashutosh::projects"
+description = "The demo projects page for zola theme serene"
+template = "projects.html"
 +++
