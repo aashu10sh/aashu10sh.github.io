@@ -1,7 +1,7 @@
 [submodule "themes/apollo"]
 	path = themes/apollo
 	url = https://github.com/not-matthias/apollo
-[submodule "themes/serene"]
-	path = themes/serene
-	url = https://github.com/isunjn/serene.git
-	branch = latest
+# [submodule "themes/serene"]
+# 	path = themes/serene
+# 	url = https://github.com/isunjn/serene.git
+# 	branch = latest
