@@ -51,7 +51,7 @@ links = [                             # Your links
     { name = "Email", icon = "email", url = "mailto:pudasainiashutosh@gmail.com" },
 ]
 
-umami_id= "e642e3d3-f203-4a19-aa2b-6f1a04ec9275"
+umami_id= "4bf6b402-0010-4216-a036-0e75845a378d" 
 homepage_layout = "about"             # "about" | "list" | "recent"
 force_theme = false                   # false | "light" | "dark"
 
