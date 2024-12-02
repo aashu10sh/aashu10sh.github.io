@@ -2,4 +2,4 @@ public/
 .direnv
 .vscode
 content/blog/.obsidian
-
+.note_to_self.txt

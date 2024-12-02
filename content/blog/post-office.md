@@ -16,6 +16,9 @@ Bukowski has a very natural way of capturing the attention of a reader with his 
 
 If you are looking for a book to motivate you or give you something to feel good about, this aint it. This is the story of a sad old man living a miserable life with no grand catharsis. However I would not discourage you to read this book if anything I want you to read it, You don't have to relate to Henry Chinaski or even like him, His story is that of so many that have come before us and will come after us, the madness of the mundane.
 
+Reading this book really reminded me of Patrick Bateman from American Psycho for some reason, here's a cool quote:)
+
+
 
 >*There are no more barriers to cross. All I have in common with the uncontrollable and the insane, the vicious and the evil, all the mayhem I have caused and my utter indifference toward it I have now surpassed. My pain is constant and sharp and I do not hope for a better world for anyone. In fact, I want my pain to be inflicted on others. I want no one to escape, but even after admitting this, there is no catharsis. My punishment continues to elude me and I gain no deeper knowledge of myself. No new knowledge can be extracted from my telling. This confession has meant nothing.*s
 >
