@@ -1,7 +1,7 @@
 +++
 title = "why we're building 12 apps in 12 months"
 date = 2024-12-03
-description = "Why we'll make 12 app in 12 months"
+description = "The blog talks about how Aashutosh, Krish and Aashish are building 12 apps in 12 months. Blog goes into detail about their origin, motivations and expectations from all this."
 [taxonomies]
 categories = ["Growth"]
 tags = ["engineering", "growth"]
