@@ -12,7 +12,7 @@ toc = true
 
 <!-- # Visionaries to Learn From   -->
 
-> This is a list of incredible people that I have stumbled up in my short time here in the internet. I feel like everyone should hear what they have to say. This list my own personal preference and is not in any particular order.
+> This is a list of incredible people that I have stumbled up in my short time here on the internet. I feel like everyone should hear what they have to say. This list my own personal preference and is not in any particular order.
 
 ## David Heinemeier Hansson (DHH)
 
