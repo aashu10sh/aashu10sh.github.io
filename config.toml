@@ -47,7 +47,7 @@ bio = "your average software engineer"                          # Your bio
 avatar = "img/avatar.webp"            # Your avatar
 links = [                             # Your links
     { name = "GitHub", icon = "github", url = "https://github.com/aashu10sh" },
-    { name = "Twitter", icon = "twitter", url = "https://twitter.com/a5hu7osh" },
+    { name = "Twitter", icon = "twitter", url = "https://twitter.com/aashu10sh" },
     { name = "Email", icon = "email", url = "mailto:pudasainiashutosh@gmail.com" },
 ]
 
