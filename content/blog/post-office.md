@@ -18,8 +18,6 @@ If you are looking for a book to motivate you or give you something to feel good
 
 Reading this book really reminded me of Patrick Bateman from American Psycho for some reason, here's a cool quote:)
 
-
-
->*There are no more barriers to cross. All I have in common with the uncontrollable and the insane, the vicious and the evil, all the mayhem I have caused and my utter indifference toward it I have now surpassed. My pain is constant and sharp and I do not hope for a better world for anyone. In fact, I want my pain to be inflicted on others. I want no one to escape, but even after admitting this, there is no catharsis. My punishment continues to elude me and I gain no deeper knowledge of myself. No new knowledge can be extracted from my telling. This confession has meant nothing.*s
+> *There are no more barriers to cross. All I have in common with the uncontrollable and the insane, the vicious and the evil, all the mayhem I have caused and my utter indifference toward it I have now surpassed. My pain is constant and sharp and I do not hope for a better world for anyone. In fact, I want my pain to be inflicted on others. I want no one to escape, but even after admitting this, there is no catharsis. My punishment continues to elude me and I gain no deeper knowledge of myself. No new knowledge can be extracted from my telling. This confession has meant nothing.*s
 >
->**Patrick Bateman ( American Psycho )**
+> **Patrick Bateman ( American Psycho )**
