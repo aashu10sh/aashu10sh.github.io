@@ -110,3 +110,15 @@ James Clear is an author and speaker best known for his book _Atomic Habits_. Hi
 [Personal Blog](https://jamesclear.com/)
 
 If you'd want someone added to this list, please send me an email:)
+
+
+
+## Joel Spolsky
+Joel Spolsky co-founded Fog Creek Software, where he created lots of cool things like the FogBugz bug tracker, Trello, and Glitch. He also worked with Jeff Atwood to create Stack Overflow and served as CEO of Stack Overflow from 2010-2019.
+
+Today he is the co-founder, with Dei Vilkinsons, of HASH.
+
+He served as a paratrooper in the Israeli army, graduated from Yale University in 1991, and spent time on the Excel team at Microsoft where he was the program manager responsible for the launch of VBA in Excel 5.0. he has also written four books, does a lot of Arduino stuff and LED art, and talk too much about Barry’s Bootcamp and Burning Man.
+
+[Personal Blog](https://www.joelonsoftware.com/)
+[Twitter](https://x.com/spolsky)
