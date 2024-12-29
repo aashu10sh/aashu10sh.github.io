@@ -64,7 +64,7 @@ Out of our own pocket/profit made by IncutStudios:) Hosting + Domain + API Keys
 We're hoping at least a few of our apps will make some money. It would be crazy of none of them did but even if they don't we still walk away with the experience and the skill which is our main objective anyways.
 
 ## How can I stay up to date?
-I will post about the various projects here on this blog as well as on [Twitter](https://x.com/aashu10sh). I might post about some projects on my LinkedIn as well but I am not very confident about posting on LinkedIn:) Expect the first app on January 1st 2025.
+I will post about the various projects here on this blog as well as on [Twitter](https://x.com/aashu10sh). I might post about some projects on my LinkedIn as well but I am not very confident about posting on LinkedIn:) Expect the first app on February 1st 2025.
 
 ## Guidance/Help
 We're always looking for guidance and you feel like you can add value to what we're doing and provide us with guidance, Please Please Please don't hesitate. My email address is on the landing page and we'd love to hear what you think:)
