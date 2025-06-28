@@ -62,7 +62,7 @@ which tells us that they are using a open source php obfusticator called Yak Pro
 Uploading the php file in VirusTotal led us to [this article](https://www.foregenix.com/blog/php-webshell-barner-detect-website-malware) from which we were now certain that this was a sophisticated full administrator access. This is how the hacker had been defacing Doko and when we removed all the static files from the server (images/documents) the hackers webshell access is removed and we no longer have issues.
 
 # Conclusion
-There was a LOT that could have been better from our side. For starters we did not change the insecure default credentials, which was a huge factor into how the hacker got in. In our code we did not have file validation and checks for the zip feature. We should have been a lot more careful especially since the app was built with php. We'll be deploying the new version of Doko on the first week of July.
+There was a LOT that could have been better from our side. For starters we did not change the insecure default credentials, which was a huge factor into how the hacker got in. In our code we did not have file validation and checks for the zip feature. We should have been a lot more careful especially since the app was built with php. We'll be deploying the new version of Doko on the first week of July. If you want to look into the file and research yourself then I've kept all the payloads in [this repository](https://github.com/aashu10sh/doko_hacked).
 
 # Doko 3.0
 Doko 3.0 was already in development when the current verson was hacked, this new doko(3.0) is built under the leadership of Krish Devkota with a much modern tech stack and security practices in mind and new doko should be out within the first week of July.
