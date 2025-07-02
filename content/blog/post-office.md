@@ -3,7 +3,7 @@ title = "The Post Office"
 date = 2023-10-22
 description = "My thoughts on The Post Office by Charles Bukowski"
 [taxonomies]
-categories = ["Books"]
+categories = ["books"]
 tags = ["philosophy", "bukowski"]
 [extra]
 lang = "en"

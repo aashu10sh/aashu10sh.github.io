@@ -3,7 +3,7 @@ title = "The Stranger"
 date = 2023-11-05
 description = "My thoughts on The Stranger by Albert Camus"
 [taxonomies]
-categories = ["Books"]
+categories = ["books"]
 tags = ["philosophy", "camus"]
 [extra]
 lang = "en"

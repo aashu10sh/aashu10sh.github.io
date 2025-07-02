@@ -1,6 +1,6 @@
 +++
 title = "How Deerwalk College's Doko was Hacked"
-date = 2024-12-20
+date = 2025-06-26
 description = "Deerwalk College's Student Profile and Exam papers management system Doko was hacked by Indo hackers"
 [taxonomies]
 categories = ["tech"]

@@ -3,7 +3,7 @@ title = "Animal Farm"
 date = 2022-11-01
 description = "Thoughts on Animal Farm by George Orwell"
 [taxonomies]
-categories = ["Books"]
+categories = ["books"]
 tags = ["philosophy", "orwell"]
 [extra]
 lang = "en"

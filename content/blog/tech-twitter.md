@@ -3,7 +3,7 @@ title = "Tech Twitter Accounts to follow"
 date = 2024-11-19
 description = "This is a compilation of some of the most cracked tech people on the internet ( twitter )."
 [taxonomies]
-categories = ["Geniuses Worth Following"]
+categories = ["geniuses Worth Following"]
 tags = ["inspiration", "growth"]
 [extra]
 lang = "en"

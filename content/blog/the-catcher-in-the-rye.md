@@ -3,7 +3,7 @@ title = "The Catcher in the Rye"
 date = 2021-05-23
 description = "My thoughts on The Catcher in the rye by J.D. Salinger"
 [taxonomies]
-categories = ["Books"]
+categories = ["books"]
 tags = ["philosophy", "salinger"]
 [extra]
 lang = "en"

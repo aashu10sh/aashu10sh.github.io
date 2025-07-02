@@ -3,7 +3,7 @@ title = "Visionaries to Learn From"
 date = 2024-12-01
 description = "This is a compilation of some of the most cracked people on the internet."
 [taxonomies]
-categories = ["Geniuses Worth Following"]
+categories = ["geniuses Worth Following"]
 tags = ["inspiration", "growth"]
 [extra]
 lang = "en"

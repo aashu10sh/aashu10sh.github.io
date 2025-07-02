@@ -3,7 +3,7 @@ title = "Frankenstein"
 date = 2021-08-23
 description = "My thoughts on Frankenstein by Marry Shelly"
 [taxonomies]
-categories = ["Books"]
+categories = ["books"]
 tags = ["horror", "shelly"]
 [extra]
 lang = "en"
