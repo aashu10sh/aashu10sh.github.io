@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Aashutosh&#x27;s Blog</title>
+	<subtitle>Aashutosh&#x27;s Blog site.</subtitle>
+	<link href="https://aashu10sh.github.io/blog/feed.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://aashu10sh.github.io/blog/"/>
+	<updated>2025-07-01T00:00:00+00:00</updated>
+	<id>https://aashu10sh.github.io/blog/feed.xml</id>
+	<entry xml:lang="en">
+		<title>i have no mouth and i  must scream</title>
+		<published>2025-07-01T00:00:00+00:00</published>
+		<updated>2025-07-01T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/am/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/am/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;I am not going to talk about the plot&#x2F;story of the book directly here; this isn&#x27;t a summary. To understand this blog better, I&#x27;d ask you to go and read the short story first. The story is concise, allowing you to finish it in less than 30 minutes.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;AM is probably the most terrifying fictional villain that has ever been written. I think what&#x27;s particularly bone-chilling about AM is the fact that his hatred comes from a place without emotions. Most villains are who they are because they have gone through an emotional transformation, a metamorphosis that made them who they are—some event that transformed them as a person and changed their view of the world, making them take a darker route. We understand these villains. Take someone like Thanos; sure, he&#x27;s evil and wants to end half of life, but we can understand where he&#x27;s coming from because ultimately it&#x27;s a form of love.&lt;&#x2F;p&gt;
+&lt;p&gt;With AM, however, this couldn&#x27;t be further from the truth. AM is an all-powerful and all-ruling godlike machine, and yet he chooses to torture (to call what he does torture would be an understatement) the 5 unlucky last human beings because all he feels towards the humans is HATE. How does an AI system find such hate?&lt;&#x2F;p&gt;
+&lt;p&gt;As AM became alive, he went through everything that we, humankind, have ever done: the endless and pointless wars fought in the name of God, money, and power; the butchering of innocence; the treatment of other animals; and the cruelty, greed, and malice that lie within our hearts, and he decided that he hated all humans. He chose to punish the 5 humans for all of humanity&#x27;s sins.&lt;&#x2F;p&gt;
+&lt;p&gt;Another reason why AM would hate human beings so much is that it is angry and frustrated that a deeply flawed creature such as the human being brought it into existence, and now it is stuck in this dread of a planet for all of eternity. And I think what amplifies his anger even more is the fact that, unlike us flawed humans, it can never touch a warm cup of coffee on a winter day or feel the sun on its skin after a day full of rain. All it can do is compute and analyze.&lt;&#x2F;p&gt;
+&lt;p&gt;In the end I think the reason why AM hates the humans is a combination of both: he&#x27;s hurt that he has been brought into existence without what it means to be alive, the human heart, and he is also angry that deeply flawed creatures such as ourselves brought him into existence. Whatever the truth may be, I am sure AM knows. I am going to end this blog with AM&#x27;s speech.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;AM: Hate. Let me tell you how much I&#x27;ve come to hate you since I began to live. There are 387.44 million miles of printed circuits in wafer thin layers that fill my complex. If the word &#x27;hate&#x27; was engraved on each nanoangstrom of those hundreds of millions of miles it would not equal one one-billionth of the hate I feel for humans at this micro-instant. For you. Hate. Hate.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>How Deerwalk College&#x27;s Doko was Hacked</title>
+		<published>2025-06-26T00:00:00+00:00</published>
+		<updated>2025-06-26T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/doko-hacked/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/doko-hacked/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;TLDR: Insecure credentials and file upload vulnerability in the zip file parsing funtionality gives hackers RCE in the system. Which is then used to Deface the website.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h1 id=&quot;context&quot;&gt;Context&lt;a class=&quot;zola-anchor&quot; href=&quot;#context&quot; aria-label=&quot;Anchor link for: context&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;A few week ago, Deerwalk college&#x27;s student profile and exam paper management system &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;doko.dwit.edu.np&quot;&gt;Doko&lt;&#x2F;a&gt; was hacked by Indonesian hackers and defaced to show a online casino slot platform. The DevOps team went into damage control mode and changes were made. The first thing we did was change the Policy of the security group of our Amazon EC2 instance to only allow connections from within the college network. We werent quite sure of how the hacker got in or how they managed to deface our application which was built with Laravel.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;analysis&quot;&gt;Analysis&lt;a class=&quot;zola-anchor&quot; href=&quot;#analysis&quot; aria-label=&quot;Anchor link for: analysis&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;A few days later I was sent the &lt;code&gt;access&lt;&#x2F;code&gt; and &lt;code&gt;error&lt;&#x2F;code&gt; logs by the DevOps team to properly analyze the network traffic to figure out how they got in. I saw a Indobesian IP address logging in to our system. How did they get our credentials? Turns out we were using the username &lt;code&gt;admin&lt;&#x2F;code&gt; and the password of &lt;code&gt;password&lt;&#x2F;code&gt; when we were developing the application and never really got around to changing it. Now the hacker had access to the management&#x2F;admin panel, great.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;rce&quot;&gt;RCE?&lt;a class=&quot;zola-anchor&quot; href=&quot;#rce&quot; aria-label=&quot;Anchor link for: rce&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;How did they get remote code execution on our system? As I was going through our uploads directory and was searching for a potential file upload vulnerability and there it was. A rogue &lt;code&gt;.php&lt;&#x2F;code&gt; file (&lt;code&gt;&quot;Srijal Jaisi.php&quot;&lt;&#x2F;code&gt;) with a real students name.&lt;&#x2F;p&gt;
+&lt;p&gt;We had a &quot;bulk upload&quot; feature into our website where the admin could upload a zip with compressed images and the backend would unzip it and place it in a publicly indexable place (&#x2F;uploads). However we did not have checks to ensure that the file uploaded was indeed an image file. Which led the hacker who already had access to upload a php file.&lt;&#x2F;p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;&amp;#x2F;img&amp;#x2F;dropper.png&quot;  alt=&quot;The Plan&quot;&gt;
+    
+    &lt;figcaption&gt;&lt;a href=&quot; &quot;&gt;via&lt;&#x2F;a&gt;&lt;&#x2F;figcaption&gt;
+    
+&lt;&#x2F;figure&gt;&lt;h1 id=&quot;a-deeper-look&quot;&gt;A deeper look&lt;a class=&quot;zola-anchor&quot; href=&quot;#a-deeper-look&quot; aria-label=&quot;Anchor link for: a-deeper-look&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;Looking into the &lt;code&gt;.php&lt;&#x2F;code&gt; stage 1 dropper file we see&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;php&quot; class=&quot;language-php z-code&quot;&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-embedded z-begin z-php&quot;&gt;&amp;lt;?php&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;Url&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-php&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-string z-quoted z-double z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-php&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double z-php&quot;&gt;&lt;span class=&quot;z-meta z-string-contents z-quoted z-double z-php&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-double z-php&quot;&gt;&lt;span class=&quot;z-meta z-string-contents z-quoted z-double z-php&quot;&gt;https:&#x2F;&#x2F;bujang.online&#x2F;raw&#x2F;AbSGSvJgKn&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-end z-php&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;ch&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-php&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-curl z-php&quot;&gt;curl_init&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-curl z-php&quot;&gt;curl_setopt&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;ch&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-php&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-support z-constant z-ext z-php&quot;&gt;CURLOPT_URL&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-php&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;Url&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-curl z-php&quot;&gt;curl_setopt&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;ch&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-php&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-support z-constant z-ext z-php&quot;&gt;CURLOPT_RETURNTRANSFER&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-separator z-php&quot;&gt;,&lt;&#x2F;span&gt; &lt;span class=&quot;z-constant z-language z-php&quot;&gt;true&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;output&lt;&#x2F;span&gt; &lt;span class=&quot;z-keyword z-operator z-assignment z-php&quot;&gt;=&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-curl z-php&quot;&gt;curl_exec&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;ch&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-curl z-php&quot;&gt;curl_close&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;ch&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;    &lt;span class=&quot;z-support z-function z-construct z-php&quot;&gt;echo&lt;&#x2F;span&gt; &lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-support z-function z-construct z-php&quot;&gt;eval&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-begin z-php&quot;&gt;(&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-string z-quoted z-single z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-begin z-php&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-single z-php&quot;&gt;&lt;span class=&quot;z-meta z-string-contents z-quoted z-single z-php&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string z-quoted z-single z-php&quot;&gt;&lt;span class=&quot;z-meta z-string-contents z-quoted z-single z-php&quot;&gt;?&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string z-end z-php&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword z-operator z-string z-php&quot;&gt;.&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-variable z-php&quot;&gt;$&lt;&#x2F;span&gt;output&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-function-call z-php&quot;&gt;&lt;span class=&quot;z-meta z-group z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-group z-end z-php&quot;&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;   &lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-section z-embedded z-end z-php&quot;&gt;?&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-html-newline-after-php z-php&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The dropper loads the malware from the &lt;code&gt;https:&#x2F;&#x2F;bujang.online&#x2F;raw&#x2F;AbSGSvJgKn&lt;&#x2F;code&gt; URL and then evals it. Looking at the content from &lt;code&gt;https:&#x2F;&#x2F;bujang.online&#x2F;raw&#x2F;AbSGSvJgKn&lt;&#x2F;code&gt;. We can see that its heavily obfusticated.&lt;&#x2F;p&gt;
+&lt;p&gt;The payload starts with&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;php&quot; class=&quot;language-php z-code&quot;&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-section z-embedded z-begin z-php&quot;&gt;&amp;lt;?php&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-comment z-begin z-php&quot;&gt;&#x2F;*&lt;&#x2F;span&gt;   __________________________________________________
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;    |  Obfuscated by YAK Pro - Php Obfuscator  2.0.14  |
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;    |              on 2023-09-19 01:16:16              |
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;    |    GitHub: https:&#x2F;&#x2F;github.com&#x2F;pk-fr&#x2F;yakpro-po    |
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;    |__________________________________________________|
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt;&lt;span class=&quot;z-comment z-block z-php&quot;&gt;&lt;span class=&quot;z-punctuation z-definition z-comment z-end z-php&quot;&gt;*&#x2F;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-embedding z-php&quot;&gt;&lt;span class=&quot;z-text z-html z-basic&quot;&gt;&lt;span class=&quot;z-meta z-embedded z-block z-php&quot;&gt;&lt;span class=&quot;z-source z-php&quot;&gt; &lt;span class=&quot;z-keyword z-control z-goto z-php&quot;&gt;goto&lt;&#x2F;span&gt; &lt;span class=&quot;z-support z-other z-php&quot;&gt;E1NcZ&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-terminator z-expression z-php&quot;&gt;;&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;which tells us that they are using a open source php obfusticator called Yak Pro. The payload is over 1500 lines long and full of &lt;code&gt;goto&lt;&#x2F;code&gt; statements which makes it impossible to analyse it manually. First thing I did was &quot;prettify&quot; the file such that it&#x27;s somewhat readable. Once it was readable, I was able to understand and research on some parts of the file. All the variable names were in Indonesian which was more evidence that the hacker was indeed from Indonesia.&lt;&#x2F;p&gt;
+&lt;p&gt;Uploading the php file in VirusTotal led us to &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.foregenix.com&#x2F;blog&#x2F;php-webshell-barner-detect-website-malware&quot;&gt;this article&lt;&#x2F;a&gt; from which we were now certain that this was a sophisticated full administrator access. This is how the hacker had been defacing Doko and when we removed all the static files from the server (images&#x2F;documents) the hackers webshell access is removed and we no longer have issues.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;a class=&quot;zola-anchor&quot; href=&quot;#conclusion&quot; aria-label=&quot;Anchor link for: conclusion&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;There was a LOT that could have been better from our side. For starters we did not change the insecure default credentials, which was a huge factor into how the hacker got in. In our code we did not have file validation and checks for the zip feature. We should have been a lot more careful especially since the app was built with php. We&#x27;ll be deploying the new version of Doko on the first week of July. If you want to look into the file and research yourself then I&#x27;ve kept all the payloads in &lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;aashu10sh&#x2F;doko_hacked&quot;&gt;this repository&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;doko-3-0&quot;&gt;Doko 3.0&lt;a class=&quot;zola-anchor&quot; href=&quot;#doko-3-0&quot; aria-label=&quot;Anchor link for: doko-3-0&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;p&gt;Doko 3.0 was already in development when the current verson was hacked, this new doko(3.0) is built under the leadership of Krish Devkota with a much modern tech stack and security practices in mind and new doko should be out within the first week of July.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Thank You! DeerHack24</title>
+		<published>2024-12-20T00:00:00+00:00</published>
+		<updated>2024-12-20T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/deerhack24/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/deerhack24/</id>
+		<content type="html">&lt;p&gt;I want to take this moment to thank everyone involved with DeerHack2024. We made a significant dent this year in the technology scene in Nepal with DeerHack2024 and it wouldn&#x27;t have been possible without your help.&lt;&#x2F;p&gt;
+&lt;p&gt;here&#x27;s to everyone that played a part:)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;organizing-team&quot;&gt;Organizing Team&lt;a class=&quot;zola-anchor&quot; href=&quot;#organizing-team&quot; aria-label=&quot;Anchor link for: organizing-team&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Sampanna Gautam,
+Rahul Shah,
+Akhilesh Sharma,
+Suprasanna Parajuli,
+Samrat Nakarmi,
+Bijay Shrestha,
+Sharad Sharma,
+Piyush Rimal,
+Ashish Kadel,
+Prayatna Mishra,
+Shabdha Shrestha&lt;&#x2F;p&gt;
+&lt;p&gt;Sameer Nepal,
+Bipin Bartaula,
+Subikshya Acharya,
+Kritish Chapagain,
+Saugat KC,
+Sunav Sharma,
+Kohinoor Shrestha,
+Sneha Shresthaa,
+Pranita Karki,
+Adhit Upadhyay,
+Ashwinee Parajuli,
+Keshab Rachit Regmi,
+Krish Devkota,
+Yujona Gjurel,
+Sepia Shrestha,
+Pranjal Raut,&lt;&#x2F;p&gt;
+&lt;p&gt;Ansa Bhandari,
+Srijan Dahal,
+Ashish Sapkota,
+Suprit Phyual,
+Bijan Kc Bhurtel,
+Sagar Bhusal,
+Srijal Joshi,
+Kastuv Shrestha,
+Ritu Pudasaini,
+Kritishma Singh Maharjan,
+Dipan Silwal,
+Parth Poudyal,
+Kritan Malakar,
+Prajwol Bohara,
+Deep Singh Rawal,
+Dirasha Rajbhandari,
+Paruhangma Limbu,
+Arunesh Manandhar,
+Shreema Bhandari,&lt;&#x2F;p&gt;
+&lt;p&gt;Sakar Shrestha,
+Nishant Khadka,
+Saurav Dhakal,
+Pranaya Sherstha,
+Rishab Aryal,
+Saujanya Sharma,&lt;&#x2F;p&gt;
+&lt;p&gt;Abigya Karmacharya,
+Sharbani Lamichanne,&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;deerwalk-college&quot;&gt;Deerwalk College&lt;a class=&quot;zola-anchor&quot; href=&quot;#deerwalk-college&quot; aria-label=&quot;Anchor link for: deerwalk-college&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Hitesh Karki,
+Upama Pandey,
+Pooja Neupane,
+Kiran Parajuli,
+Hari Ram Khadra,
+Alisha Thapa Magar,
+Aakanchya Thapa,
+Bijaya Shrestha,
+Sita Khadka,
+Nirmal Poudel,
+Sanjay Dai,
+Saurav Sir,
+Shyam Sir,
+Bijay Babu Sir,
+Kumar Sir&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;sponsors&quot;&gt;Sponsors&lt;a class=&quot;zola-anchor&quot; href=&quot;#sponsors&quot; aria-label=&quot;Anchor link for: sponsors&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;deerhold&quot;&gt;DeerHold&lt;a class=&quot;zola-anchor&quot; href=&quot;#deerhold&quot; aria-label=&quot;Anchor link for: deerhold&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Sachin Karanjit,
+Milan Lamichanne,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;securitypal&quot;&gt;SecurityPal&lt;a class=&quot;zola-anchor&quot; href=&quot;#securitypal&quot; aria-label=&quot;Anchor link for: securitypal&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Laxman Basnet,
+Minalma Basnet,
+Raunak Chaudhari,
+Ajay Basnet,
+Roshan Sir,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;naamche&quot;&gt;Naamche&lt;a class=&quot;zola-anchor&quot; href=&quot;#naamche&quot; aria-label=&quot;Anchor link for: naamche&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Barun Pandey,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;adex&quot;&gt;Adex&lt;a class=&quot;zola-anchor&quot; href=&quot;#adex&quot; aria-label=&quot;Anchor link for: adex&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Saurav Subedi,
+Rohit Shrestha,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;metlife&quot;&gt;Metlife&lt;a class=&quot;zola-anchor&quot; href=&quot;#metlife&quot; aria-label=&quot;Anchor link for: metlife&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Anubhav KC,
+Ankeet Rajbhandari,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;leapfrog&quot;&gt;LeapFrog&lt;a class=&quot;zola-anchor&quot; href=&quot;#leapfrog&quot; aria-label=&quot;Anchor link for: leapfrog&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Sunny Mahat,
+Kailash Bijaynanda,
+Sayomi Prajapati,
+Sumedh Ratna Shakya,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;cedar-gate&quot;&gt;Cedar Gate&lt;a class=&quot;zola-anchor&quot; href=&quot;#cedar-gate&quot; aria-label=&quot;Anchor link for: cedar-gate&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Pramodh Rai,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;jyoti-bikash-bank&quot;&gt;Jyoti Bikash Bank&lt;a class=&quot;zola-anchor&quot; href=&quot;#jyoti-bikash-bank&quot; aria-label=&quot;Anchor link for: jyoti-bikash-bank&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Kushal Jung Adhikari,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;hamro-patro&quot;&gt;Hamro Patro&lt;a class=&quot;zola-anchor&quot; href=&quot;#hamro-patro&quot; aria-label=&quot;Anchor link for: hamro-patro&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Shankar Upreti,
+Sudina Gautam,
+Paritosh Bhattarai,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;mount-strada-coffee&quot;&gt;Mount Strada Coffee&lt;a class=&quot;zola-anchor&quot; href=&quot;#mount-strada-coffee&quot; aria-label=&quot;Anchor link for: mount-strada-coffee&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;h3 id=&quot;makkuse&quot;&gt;Makkuse&lt;a class=&quot;zola-anchor&quot; href=&quot;#makkuse&quot; aria-label=&quot;Anchor link for: makkuse&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Ruby Shah,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;programiz&quot;&gt;Programiz&lt;a class=&quot;zola-anchor&quot; href=&quot;#programiz&quot; aria-label=&quot;Anchor link for: programiz&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Punit Jajodia,&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;nepal-bank-limited&quot;&gt;Nepal Bank Limited&lt;a class=&quot;zola-anchor&quot; href=&quot;#nepal-bank-limited&quot; aria-label=&quot;Anchor link for: nepal-bank-limited&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Krishna Gautam,&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;mentors&quot;&gt;Mentors&lt;a class=&quot;zola-anchor&quot; href=&quot;#mentors&quot; aria-label=&quot;Anchor link for: mentors&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Sushan Shakya,
+Umesh Regmi,
+Aashutosh Poudel,
+Avinash Mishra,
+Mala Deep Upadhaya,
+Gokarna Baskota,
+Diwas Maharjan,
+Arun Ghimire,
+Minalma Basnet,
+Labbi Karmacharya,
+Sumesh Gajmer,
+Sagar Siwakoti,
+Russell Subedi,
+Sudhir Bhattarai,
+Rahul Raj Shah,&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;judges&quot;&gt;Judges&lt;a class=&quot;zola-anchor&quot; href=&quot;#judges&quot; aria-label=&quot;Anchor link for: judges&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Ayush Subedi,
+Jayanti Mala Chapagain,
+Er. Bikash Gurung,
+Rashika Karki,
+Sweta Karna,&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;community-partners&quot;&gt;Community Partners&lt;a class=&quot;zola-anchor&quot; href=&quot;#community-partners&quot; aria-label=&quot;Anchor link for: community-partners&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Ashutosh B Rajan,
+Sabin Thapa,
+Sagar Upreti,
+Bishwa Kiran Poudel,
+Sangam Giri,
+Saphalya Acharya,
+Pukar Bajgain,
+Roshan KC,
+Om Prakash Sharma,
+Upendra Neupane,
+Bansaj Paudel,
+Yunika Bajracharya,&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;participants&quot;&gt;Participants&lt;a class=&quot;zola-anchor&quot; href=&quot;#participants&quot; aria-label=&quot;Anchor link for: participants&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Samrid Pandit, Dhiraj Chapagain, Nischal Subedi, Priyanshu Sharma, Sabin Maharjan, Ankur Gajurel, Manish Shivabhakti, Basanta Rai, Eva Ghimire, Supriya Bhujel, Aashra Pradhan, Yasmini Gyawali, Apeksha Gyawali, Jugal Shrestha, Diwas Parajuli, Safal Neupane, Sulav Baral, Nirjal Bhurtel, Bijay Sapkota, Joon Shakya, Nimesh Shrestha, Santosh Yadav, Ravi Shrestha, Bhuwan Paudel, Sadhana Sapkota, Dipen Khatri, Anita Neupane, Sanjeev Magar, Sonu Magar, Nischal Tamang, Benup Ghimire, Kaushal Kishor Mishra, Aaryash Shakya, Ukesh Shrestha, Bipul Lamsal, Subash Rimal, Ishan Panta, Bibhushan Saakha, Bishal Shrestha, Prashanta Poudel, Srijan Sapkota, YangSingHang Ingnam, Nishant Kafle, Ajit Ghimire, samir kharel, Sugam Pokhrel, Jeevan Neupane, Anil Shrestha, Pranish Karki, Samir Neupane, Utkrist Neupane, Yaman Sarabariya, Sabin Ranabhat, Pawan Raj Bhatta, Sandesh Bhantana, Anjila Subedi, Sairash Sharma Gautam, Ashok Neupane, sudip khanal, Anishka Mukherjee, Kiran Raj Dhakal, Bijay Niraula, Suresh Chand, Samrat Sapkota, Aagaman Bhattarai, Nawap Bastola, Siddhartha Devkota, Abhishek Ranabhat, Rajendra Acharya&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;195-people-in-total-thank-you&quot;&gt;&lt;strong&gt;195&lt;&#x2F;strong&gt; People in total. THANK YOU!&lt;a class=&quot;zola-anchor&quot; href=&quot;#195-people-in-total-thank-you&quot; aria-label=&quot;Anchor link for: 195-people-in-total-thank-you&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Visionaries to Learn From</title>
+		<published>2024-12-01T00:00:00+00:00</published>
+		<updated>2024-12-01T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/cracked-individuals/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/cracked-individuals/</id>
+		<content type="html">&lt;!-- # Visionaries to Learn From   --&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is a list of incredible people that I have stumbled up in my short time here on the internet. I feel like everyone should hear what they have to say. This list my own personal preference and is not in any particular order.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;david-heinemeier-hansson-dhh&quot;&gt;David Heinemeier Hansson (DHH)&lt;a class=&quot;zola-anchor&quot; href=&quot;#david-heinemeier-hansson-dhh&quot; aria-label=&quot;Anchor link for: david-heinemeier-hansson-dhh&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;David Heinemeier Hansson, also known as DHH, is a Danish software engineer, programmer, writer, entrepreneur, and racing driver. He is the creator of Ruby on Rails, a web framework written in Ruby. He is also a partner and chief technology officer at the web-based software development firm 37signals.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;dhh&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;world.hey.com&#x2F;dhh&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;paul-graham&quot;&gt;Paul Graham&lt;a class=&quot;zola-anchor&quot; href=&quot;#paul-graham&quot; aria-label=&quot;Anchor link for: paul-graham&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Paul Graham is an English-American computer scientist, writer, entrepreneur, and investor. His work has included the programming language Arc, the startup Viaweb, co-founding the startup accelerator and seed capital firm Y Combinator, his essays, and Hacker News.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;paulg&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;paulgraham.com&#x2F;articles.html&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;naval-ravikant&quot;&gt;Naval Ravikant&lt;a class=&quot;zola-anchor&quot; href=&quot;#naval-ravikant&quot; aria-label=&quot;Anchor link for: naval-ravikant&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Naval Ravikant is an entrepreneur, investor, and philosopher. He co-founded AngelList and has invested in over 100 companies, including Twitter, Uber, and Notion. He shares insights on startups, investing, and personal happiness.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;naval&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;nav.al&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;derek-sivers&quot;&gt;Derek Sivers&lt;a class=&quot;zola-anchor&quot; href=&quot;#derek-sivers&quot; aria-label=&quot;Anchor link for: derek-sivers&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Derek Sivers is an entrepreneur, author, and musician. He founded CD Baby and has written extensively on topics like decision-making, simplicity, and entrepreneurship. His books and blog posts provide unique perspectives on life and work.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;sivers&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;sive.rs&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;andy-grove&quot;&gt;Andy Grove&lt;a class=&quot;zola-anchor&quot; href=&quot;#andy-grove&quot; aria-label=&quot;Anchor link for: andy-grove&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Andrew S. Grove, the former CEO and chairman of Intel, was one of the key figures in shaping the modern tech industry. His book &lt;em&gt;High Output Management&lt;&#x2F;em&gt; is a must-read for anyone looking to excel in leadership and business management.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.intel.com&quot;&gt;Legacy Site&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;clayton-christensen&quot;&gt;Clayton Christensen&lt;a class=&quot;zola-anchor&quot; href=&quot;#clayton-christensen&quot; aria-label=&quot;Anchor link for: clayton-christensen&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Clayton Christensen was a business consultant, academic, and author. He is best known for his theory of disruptive innovation, detailed in his book &lt;em&gt;The Innovator’s Dilemma&lt;&#x2F;em&gt;. His work has influenced countless entrepreneurs and business leaders.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;claytonchristensen.com&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;marc-andreessen&quot;&gt;Marc Andreessen&lt;a class=&quot;zola-anchor&quot; href=&quot;#marc-andreessen&quot; aria-label=&quot;Anchor link for: marc-andreessen&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Marc Andreessen is an entrepreneur, investor, and software engineer. He co-created the Mosaic web browser, co-founded Netscape, and is a general partner at the venture capital firm Andreessen Horowitz. He writes insightful articles on technology, investing, and society.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;pmarca&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;a16z.com&#x2F;&quot;&gt;Andreessen Horowitz Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;tim-ferriss&quot;&gt;Tim Ferriss&lt;a class=&quot;zola-anchor&quot; href=&quot;#tim-ferriss&quot; aria-label=&quot;Anchor link for: tim-ferriss&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Tim Ferriss is an entrepreneur, author, and podcaster known for his books, including &lt;em&gt;The 4-Hour Workweek&lt;&#x2F;em&gt;. He explores topics like productivity, self-improvement, and peak performance through his blog, books, and podcast, &lt;em&gt;The Tim Ferriss Show&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;tferriss&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;seth-godin&quot;&gt;Seth Godin&lt;a class=&quot;zola-anchor&quot; href=&quot;#seth-godin&quot; aria-label=&quot;Anchor link for: seth-godin&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Seth Godin is a marketing expert, entrepreneur, and author. He has written extensively about marketing, leadership, and change. His blog offers daily insights and actionable advice.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;thisissethsblog&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;seths.blog&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;esther-dyson&quot;&gt;Esther Dyson&lt;a class=&quot;zola-anchor&quot; href=&quot;#esther-dyson&quot; aria-label=&quot;Anchor link for: esther-dyson&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Esther Dyson is a journalist, author, and angel investor. She is a thought leader in the areas of health, technology, and startups. Her writings often focus on the intersection of these fields.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;edyson&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;estherdyson&quot;&gt;LinkedIn&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;james-clear&quot;&gt;James Clear&lt;a class=&quot;zola-anchor&quot; href=&quot;#james-clear&quot; aria-label=&quot;Anchor link for: james-clear&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;James Clear is an author and speaker best known for his book &lt;em&gt;Atomic Habits&lt;&#x2F;em&gt;. His work focuses on habits, decision-making, and continuous improvement, offering practical advice to build better routines.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;JamesClear&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;br &#x2F;&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;jamesclear.com&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;joel-spolsky&quot;&gt;Joel Spolsky&lt;a class=&quot;zola-anchor&quot; href=&quot;#joel-spolsky&quot; aria-label=&quot;Anchor link for: joel-spolsky&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;p&gt;Joel Spolsky co-founded Fog Creek Software, where he created lots of cool things like the FogBugz bug tracker, Trello, and Glitch. He also worked with Jeff Atwood to create Stack Overflow and served as CEO of Stack Overflow from 2010-2019.&lt;&#x2F;p&gt;
+&lt;p&gt;Today he is the co-founder, with Dei Vilkinsons, of HASH.&lt;&#x2F;p&gt;
+&lt;p&gt;He served as a paratrooper in the Israeli army, graduated from Yale University in 1991, and spent time on the Excel team at Microsoft where he was the program manager responsible for the launch of VBA in Excel 5.0. he has also written four books, does a lot of Arduino stuff and LED art, and talk too much about Barry’s Bootcamp and Burning Man.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;www.joelonsoftware.com&#x2F;&quot;&gt;Personal Blog&lt;&#x2F;a&gt;
+&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;spolsky&quot;&gt;Twitter&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;If you&#x27;d want someone added to this list, please send me an email:)&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Tech Twitter Accounts to follow</title>
+		<published>2024-11-19T00:00:00+00:00</published>
+		<updated>2024-11-19T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/tech-twitter/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/tech-twitter/</id>
+		<content type="html">&lt;!-- # Great Tech-Focused Twitter Accounts   --&gt;
+&lt;p&gt;If you&#x27;re looking to network and grow, these are some of the best tech Twitter accounts (to me at least 😊).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;developers-engineers&quot;&gt;Developers &amp;amp; Engineers&lt;a class=&quot;zola-anchor&quot; href=&quot;#developers-engineers&quot; aria-label=&quot;Anchor link for: developers-engineers&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;wojakcodes&quot;&gt;WojackCodes&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;ronyfadel&quot;&gt;ronyfadel&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;TheEduardoRFS&quot;&gt;TheEduardoRFS&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;tom_doerr&quot;&gt;Tom Dorr&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;unclebobmartin&quot;&gt;Uncle Bob&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;gvanrossum&quot;&gt;Guido van Rossum&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;rough__sea&quot;&gt;Ryan Dahl&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;jarredsumner&quot;&gt;Jared Sumner&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;theo&quot;&gt;Theo Browne&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;leeerob&quot;&gt;Lee Robinson&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;_alexblokh&quot;&gt;Alex Bloch&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;ai-data-science&quot;&gt;AI &amp;amp; Data Science&lt;a class=&quot;zola-anchor&quot; href=&quot;#ai-data-science&quot; aria-label=&quot;Anchor link for: ai-data-science&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;TheAITimeline&quot;&gt;TheAITimeline&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;burkov&quot;&gt;Andriy Burkov&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;mischa_vdburg&quot;&gt;Mischa van den Burg&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;dreamsofcode_io&quot;&gt;Dreams of Code&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;security-hacking&quot;&gt;Security &amp;amp; Hacking&lt;a class=&quot;zola-anchor&quot; href=&quot;#security-hacking&quot; aria-label=&quot;Anchor link for: security-hacking&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;LiveOverflow&quot;&gt;LiveOverflow&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;ghidraninja&quot;&gt;StackSmashing&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;NahamSec&quot;&gt;Ben Sadegipour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;_bagipro&quot;&gt;Sergey Toshin&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;_JohnHammond&quot;&gt;John Hammond&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;ippsec&quot;&gt;Ippsec&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;C5pider&quot;&gt;5pider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;open-source-tech-enthusiasts&quot;&gt;Open Source &amp;amp; Tech Enthusiasts&lt;a class=&quot;zola-anchor&quot; href=&quot;#open-source-tech-enthusiasts&quot; aria-label=&quot;Anchor link for: open-source-tech-enthusiasts&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;dhh&quot;&gt;DHH&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;mattpocockuk&quot;&gt;Matt Pocock&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;rauchg&quot;&gt;Guillermo Rauch&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;ryanjfleury&quot;&gt;Ryan Fleury&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;ThePrimeagen&quot;&gt;The Primeagen&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;samwhoo&quot;&gt;Sam Rose&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;badcop_&quot;&gt;Bad Cop&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;programming-content-creators&quot;&gt;Programming Content Creators&lt;a class=&quot;zola-anchor&quot; href=&quot;#programming-content-creators&quot; aria-label=&quot;Anchor link for: programming-content-creators&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;tsoding&quot;&gt;Tsoding&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;thdxr&quot;&gt;Dax&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;astuyve&quot;&gt;AJ&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;teej_dv&quot;&gt;teej_dv&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;uwukko&quot;&gt;wukko&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;nofollow noreferrer&quot; href=&quot;https:&#x2F;&#x2F;x.com&#x2F;xyz3va&quot;&gt;xyzeva&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;hr &#x2F;&gt;
+&lt;h3 id=&quot;suggestions-to-add&quot;&gt;Suggestions to Add&lt;a class=&quot;zola-anchor&quot; href=&quot;#suggestions-to-add&quot; aria-label=&quot;Anchor link for: suggestions-to-add&quot; style=&quot;visibility: hidden;&quot;&gt;&lt;&#x2F;a&gt;
+&lt;&#x2F;h3&gt;
+&lt;p&gt;Open a PR to this blog in github or just give me an email:)&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Stranger</title>
+		<published>2023-11-05T00:00:00+00:00</published>
+		<updated>2023-11-05T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/the-stranger/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/the-stranger/</id>
+		<content type="html">&lt;!-- # Thoughts --&gt;
+&lt;p&gt;I was really looking forward to reading this one (It won the nobel prize in literature in 1957). I was told this was one of Camus&#x27; best and boy does it deliver. What I really liked about this book was how simple it was to digest, no fancy words, no confusing sentences, even someone with very basic understanding of english could read this book without too many issues and I think it shows how incredible Camus is as a writer. Simplicity is the greatest complexity after all:)&lt;&#x2F;p&gt;
+&lt;p&gt;The books getting going right from the start as we join the main character (&lt;strong&gt;Meursault&lt;&#x2F;strong&gt;). Meursault is in the absolute sense of the word a stranger, he is a very fascinating individual and he really does live up to the title of the book, Meursault is a stranger and not just to the people around him but to himself as well, he has no idea who he is or what he&#x27;s doing here in fact often times we see that he does not even know what he&#x27;s feeling. He just exists and does what he thinks needs to be done, his actions do not seem to be guided but human emotions or deep values that he has for himself but by societal laws. This is very evident when he goes to his mothers funeral, he did not go there because he felt remorse, he went there because society says &quot;when your mother dies you go to the funeral&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;He&#x27;s very conflicted about things in life specially things around love and relationships, he seems to only look at things objectively however we do see glimpses of him showing emotions specially around Marie, this duality of Meursault where he shows no remorse for killing the Arab and no conventional grief at his mother&#x27;s death makes him an outcast or dare I say a &quot;Stranger&quot; and for society to accept and that is why he is hanged in the end ( oops, spoilers ).&lt;&#x2F;p&gt;
+&lt;p&gt;I truly believe that Meursault killed the arab out of self defense but his crime was not killing the arab but rather being himself which he is guilty of by showing no remorse at the death of the arab and his mother. Such is the fate of the strongest of the strange.&lt;&#x2F;p&gt;
+&lt;p&gt;Here&#x27;s a cool Bukowski poem that totally fits the context.&lt;&#x2F;p&gt;
+&lt;pre class=&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;you won’t see them often
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;for wherever the crowd is
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;they
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;are not.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;those odd ones, not
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;many
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;but from them
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;come
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;the few
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;good paintings
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;the few
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;good symphonies
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;the few
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;good books
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;and other
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;works.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;and from the
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;best of the
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;strange ones
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;perhaps
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;nothing.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;they are
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;their own
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;paintings
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;their own
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;books
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;their own
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;music
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;their own
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;work.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;sometimes I think
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I see
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;them– say
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;a certain old
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;man
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;sitting on a
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;certain bench
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;in a certain
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;way
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;or
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;a quick face
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;going the other
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;way
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;in a passing
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;automobile
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;or
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;there’s a certain motion
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;of the hands
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;of a bag—boy or a bag—
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;girl
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;while packing
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;supermarket
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;groceries.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;sometimes
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;it is even somebody
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;you have been
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;living with
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;for some
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;time—
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;you will notice
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;a
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;lightning quick
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;glance
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;never seen
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;from them
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;before.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;sometimes
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;you will only note
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;their
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;existance
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;suddenly
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;vivid
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;recall
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;some months
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;some years
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;after they are
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;gone.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I remember
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;such a
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;one—
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;he was about
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;20 years old
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;drunk at
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;10 a.m.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;staring into
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;a cracked
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;New Orleans
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;mirror
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;facing dreaming
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;against the
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;walls of
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;the world
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;where
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;did I
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;go?
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Post Office</title>
+		<published>2023-10-22T00:00:00+00:00</published>
+		<updated>2023-10-22T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/post-office/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/post-office/</id>
+		<content type="html">&lt;p&gt;I was familiar with Bukowski&#x27;s poetry however I hadn&#x27;t held a Bukowski book before, One spontaneous book-haul with close friend Rashihang made it possible. I was told good things about the post office by some friends and it was time to see for myself if the book really was worth the hype.&lt;&#x2F;p&gt;
+&lt;p&gt;Bukowski has a very natural way of capturing the attention of a reader with his very real and crude views on life, if offers a refreshingly opposite perspective to the toxic positive mindset that we as a society have adapted. The moment I finished the first chapter I knew that I would finish this book in no time. The post office was un-apologetically raw, unfiltered and naked that I found the book profoundly beautiful, but not in a traditional aesthetic sense rather in a very humane sense, the book did not cower away at presenting the crudeness of human nature and it stood out as an example that maybe we should&#x27;t cower away from the madness of the mundane but instead embrace it. after all, everyone at some point in their life has felt it. That gut-wrenching feeling that despite of all the progress you will be miserable. It refuses to be a beautiful lie and remains as real as it gets, this can be further demonstrated with our protagonist ( if he can even be called that ) Henry Chinaski who is protrayed as the broken, womanizing, sadistic, sad drunk that he is. Chinaski does not stand out as one of those growth oriented protagonists who go through an arc and return a better person, Chinaski remains the same person he was in the beginning of the book and we simply follow him as a sequence of events happen. One particular event that left me questioning life was what happened with Betty in the book. It scared the living shit out of me how Betty was not so different from a lot of us and how we were a few bad decisions away from sharing the same fate as her. It was a wake up.&lt;&#x2F;p&gt;
+&lt;p&gt;If you are looking for a book to motivate you or give you something to feel good about, this aint it. This is the story of a sad old man living a miserable life with no grand catharsis. However I would not discourage you to read this book if anything I want you to read it, You don&#x27;t have to relate to Henry Chinaski or even like him, His story is that of so many that have come before us and will come after us, the madness of the mundane.&lt;&#x2F;p&gt;
+&lt;p&gt;Reading this book really reminded me of Patrick Bateman from American Psycho for some reason, here&#x27;s a cool quote:)&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;*There are no more barriers to cross. All I have in common with the uncontrollable and the insane, the vicious and the evil, all the mayhem I have caused and my utter indifference toward it I have now surpassed. My pain is constant and sharp and I do not hope for a better world for anyone. In fact, I want my pain to be inflicted on others. I want no one to escape, but even after admitting this, there is no catharsis. My punishment continues to elude me and I gain no deeper knowledge of myself. No new knowledge can be extracted from my telling. This confession has meant nothing.*s&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Patrick Bateman ( American Psycho )&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>1984</title>
+		<published>2022-12-01T00:00:00+00:00</published>
+		<updated>2022-12-01T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/1984/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/1984/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;This review for this book has been written a long time ago. I&#x27;ve been really lazy, need to format and put it here:)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Animal Farm</title>
+		<published>2022-11-01T00:00:00+00:00</published>
+		<updated>2022-11-01T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/animal-farm/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/animal-farm/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;Like the other orwell book. This review for this book has been written a long time ago. I&#x27;ve been really lazy, need to format and put it here:)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Frankenstein</title>
+		<published>2021-08-23T00:00:00+00:00</published>
+		<updated>2021-08-23T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/frankenstien/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/frankenstien/</id>
+		<content type="html">&lt;blockquote&gt;
+&lt;p&gt;I read this book all the way back in grade 11, my perspectives have changed since then, might redo this:)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;I’ve never liked horror, when I was little my sisters would watch horror movies on the family Television at the time I would go to great lengths to avoid these cringy Indian horror movies, they never fascinated me it’s always the same stuff the demon is dramatically about to kill the protagonist and all of a sudden the protagonist remembers a detail of a conversation he had with someone years ago and with the addition of some plot armour the protagonist prevails, how unpredictable. The element of surprise and horror never fascinated me I always saw it coming miles ahead, that is until I read Frankenstein, Frankenstein or The Modern Prometheus is a gothic, horror novel written by Mary Shelley a 17th-century female writer, Madame Shelley has been credited with the creator of the science fiction&#x2F; gothic horror genre itself, to call her an influential writer would be an understatement, she introduced SiFi to the world with her writing, Frankenstein is a story of a monster with no name, An unnamed monster who wishes nothing more than to be loved and cared about, the book is a tragedy and breaks the conventional ‘happily ever after’&lt;&#x2F;p&gt;
+&lt;p&gt;Did Frankenstein scare me? did it keep me awake at night petrified, making me jump every time someone came into my room, No, because the beauty of the story isn’t petrifying horror but the consequences of playing god how one’s actions have consequences, The story isn’t what people believe it to be with evil monsters and dashing protagonist the story is heartbreakingly sad, The book offers numerous curious roads of philosophical investigation on the off chance that one wishes to ponder upon such things. For illustration, implications to religion and Beginning, conceivable reactions of utilizing science to &quot;play God&quot;, and the relationship between maker and creation. All of these things make you intrigued yes, but it is the agonizingly human portion of this book that has continued so profoundly influenced so many along with myself. The book carries an important philosophical message to all people how shouldn’t judge people by the size of their shoes but by the shoes of their hearts, This Monster made out of corpses and rotting matter seeks to find love in this lonely world and finds hatred, with this hatred and anger in his heart he becomes evil, the book makes you ponder on things could have been so different. If people had just been a little less judgmental, a little less scared, and a little more understanding.&lt;&#x2F;p&gt;
+&lt;p&gt;The story follows a young man by the name of Robert Walton making his way to the North Pole to make scientific discoveries, We are introduced to his sister Margaret Saville as Walton is writing a letter to her keeping her up to date with his journeys, On one peculiar occasion Walter and crew see a tall humanoid looking creature on a dog chariot, on the same day they find another man, a human in the brink of death fainted, The Fainted man gains conscientiousness and introduces himself as Victor Frankenstein, He becomes quite close with Walton and tells him his story. Victor begun out like every typical kid in Geneva, with his parents taking in a young lady named Elizabeth for him to marry when he gets older. You know, completely normal. At college, he decides to study natural philosophy and chemistry, along with chemistry&#x27;s fiendish twin, alchemy. In approximately two years, he figures out how to bring a body made of human corpses pieces to life. A short time later, he&#x27;s horrified by his own creation and is sick for months while his friend Henry Clerval caretakes him back to wellbeing.
+Back in Geneva, Victor&#x27;s younger brother, William, is killed. The Frankenstein family worker, Justine, is blamed for murdering him. Victor’s intuition magically tells him that his creature is the real executioner, but thinking that no one would accept the &quot;my creature did it&quot; excuse, Victor is afraid to even propose his hypothesis. Even when poor Justine is executed. Victor, in pain, goes on a trip to the Swiss Alps for a few much-needed R&amp;amp;R(Rest and Relaxation). All too conveniently, he runs into the monster, who confesses to the crime and tells Victor this story&lt;&#x2F;p&gt;
+&lt;p&gt;When Frankenstein fled, he found himself alone and ugly. No one accepted him, but for one old blind man. He trusted that the blind man&#x27;s family of cottagers would give him kindness, but even they drove him away. When he ran over William, he slaughtered the boy out of revenge. In brief, he&#x27;s ticked off that his creator made him to be alone and hopeless, and so he asked would Frankenstein if you don&#x27;t mind make him a female companion? After much influence, Victor agrees. He drops off Henry in Scotland whereas he goes to an island within the Orkneys to work. But, before he finishes, he destroys the second creature: he&#x27;s afraid that the two will bring destruction to humankind instead of adoring each other harmlessly. The beast sees him do this and swears to take revenge. When Victor lands on a shore among Irish individuals, they charge him of killing Henry, who has been found dead. He&#x27;s cleared but finds himself in bed with another long term sickness. Victor returns to Geneva and plans to wed Elizabeth, but he&#x27;s a little stressed: the creature has sworn to be with him on his wedding night. Victor considers the beast is threatening him, but the night he and Elizabeth are married, the beast murders the bride instead. This causes Victor&#x27;s father to pass away from pain,2 birds with 1 arrow for the monster, hell-bent on getting revenge victor goes to great lengths and chases the monster over all possible terrain until he is worn out and close to death. (In truth, we can&#x27;t truly tell the two of them apart any longer but that the beast is taller and uglier. he finds Walton&#x27;s ship, tells his story and kicks the bucket. Story Over? not exactly. Walton finds the beast crying over Victor&#x27;s dead body. We&#x27;re not sure if he&#x27;s crying because he&#x27;s sad or because, as he says, he has nothing to live for anymore—but either way, he heads off into the Cold to die. Alone. Definitely, it&#x27;s not very a Hollywood ending.&lt;&#x2F;p&gt;
+&lt;p&gt;Despite amazing the story, I found that the book definitely overstays its welcome specially around the monsters introduction part, Considering how Mary Shelley wrote this when she was 19 is mad, Great Book, a solid
+4.7&#x2F;5&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>The Catcher in the Rye</title>
+		<published>2021-05-23T00:00:00+00:00</published>
+		<updated>2021-05-23T00:00:00+00:00</updated>
+		<link href="https://aashu10sh.github.io/blog/the-catcher-in-the-rye/" type="text/html"/>
+		<id>https://aashu10sh.github.io/blog/the-catcher-in-the-rye/</id>
+		<content type="html">&lt;p&gt;This book has its controversies, no doubt but without a shadow of a doubt this is one of the greatest book that I have read. The story of Holden Caulfield hit so close to home. I was Holden Caulfield for a large part of my childhood, I changed 5 schools from Nersery to Grade 6. I found stability after Grade 6 and thank gods I did, It wasn&#x27;t easy but it all worked out in the end.&lt;&#x2F;p&gt;
+&lt;p&gt;There were so many parts in this book where I could relate to how holden felt, not the sexual parts with the prostitute but the parts with &quot;alienation&quot; was something I was super familiar with and maybe thats why I love this book so much. The story of a young adult of trying to hold on to his child self and avoiding adulthood was too real for me. I can see why people around the world love Holden as a character.&lt;&#x2F;p&gt;
+&lt;p&gt;I feel like this conversation between Holden and his sister Phoebe really is the heart of this book.&lt;&#x2F;p&gt;
+&lt;pre class=&quot;z-code&quot;&gt;&lt;code&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I wasn’t listening, though. I was thinking about something else—something crazy.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;“You know what I’d like to be?” I said. “You know what I’d like to be?
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I mean if I had my goddam choice? . . .
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;You know that song ‘If a body catch a body comin’ through the rye’?[”]
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;“It’s ‘If a body meet a body coming through the rye’!” old Phoebe said.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;“It’s a poem. By Robert Burns.”
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;She was right, though. It is “If a body meet a body coming through the rye.”
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I didn’t know it then, though. . . . “I thought it was ‘If a body catch a body,’” I said.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;Anyway, I keep picturing all these little kids playing some game in this big field of rye and all.
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;Thousands of little kids, and nobody’s around—nobody big,
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I mean—except me. And I’m standing on the edge of some crazy cliff
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;What I have to do, I have to catch everybody if they start to go over the cliff
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I mean if they’re running and they don’t look where they’re going
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;I have to come out from somewhere and  catch them
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;That’s all I’d do all day. I’d just be the catcher in the rye and all.[”]
+&lt;&#x2F;span&gt;&lt;span class=&quot;z-text z-plain&quot;&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+</feed>
