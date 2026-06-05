@@ -26,4 +26,4 @@ But when Ryuji chooses domestic life, they interpret it as contamination. Love, 
 
 In their logic, Ryuji has already “fallen.” What they do next is framed—by them—as restoring him. By killing him at the moment of perceived corruption, they believe they’re fixing his narrative, turning him back into something pure and significant.
 
-Symbolically, the book represents Mishima and people like him clinging to and ensuring "purity" of old Japan is preserved and the new western influence is killed as viewed as a betrayal.
+Symbolically, the book represents Mishima and people like him clinging to and ensuring "purity" of old Japan is preserved and the new western influence is killed as viewed as a betrayal. 
