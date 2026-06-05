@@ -5,5 +5,4 @@ template = 'home.html'
 lang = 'en'
 +++
 
-
-I'm currently studying Computer Science at the Deerwalk Institute of Technology, Nepal. In my spare time I enjoy working on side projects, contributing to open source, and reading. I'm also a big fan of the Go programming language. On this blog I write about projects I'm working on as well as general topics I'm interested in:)
+I'm a Software Engineer from Kathmandu, Nepal. In my spare time I enjoy working on meaningful side projects, contributing to open source (trying to 😅), and reading philosophy. I'm deeply interested in distributed systems, cybersecurity, and the Linux kernel, with a soft spot for Go. On this blog I write about projects I'm working on and topics that keep me up at night. :)

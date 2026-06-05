@@ -43,7 +43,7 @@ anchors = "on"
 
 name = "Aashutosh Pudasaini"                         # Your name
 id = "aashu10sh"                           # Your id / username / handle
-bio = "your average software engineer"                          # Your bio
+bio = "Software engineer, Silicon Peaks 🏔️"                          # Your bio
 avatar = "img/avatar.webp"            # Your avatar
 links = [                             # Your links
     { name = "GitHub", icon = "github", url = "https://github.com/aashu10sh" },
