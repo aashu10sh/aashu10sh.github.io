@@ -1,0 +1,57 @@
+[[project]]
+name = "Sotera"
+desc = "A fingerprint based password manager. You use your fingerprint to access your password management dashboard where you can manage all your passwords safely."
+tags = ["FastAPI", "svelete"]
+links = [
+    {name = "github", url = "https://github.com/aashu10sh/sotera"},
+    # {name = "docs", url = "https://example.com"},
+]
+
+[[project]]
+name = "Vault"
+desc = "Blockchain based KYC verification and storage platform. This project was submitted to the ETHGlobal Hackathon2024."
+tags = ["etherium", "TypeScript"]
+links = [
+    # {name = "homepage", url = "https://example.com"},
+    {name = "github", url = "https://github.com/deerwalk-blockchain-community/vault"},
+    # {name = "docs", url = "https://example.com"},
+]
+
+[[project]]
+name = "Urlify"
+desc = "URL Shortner Tool with Authentication built for the 4th Sem NodeJS Class. This project uses SvelteKit with shadcn and hono and postgres for the backend. An opensource alternative to bit.ly"
+tags = ["SvelteKit", "TypeScript", "shadcn", "HonoJs"]
+links = [
+    {name = "github", url = "https://github.com/aashu10sh/urlify"},
+]
+
+# [[project]]
+# name = "amet"
+# desc = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi saepe dolor unde iusto dolore nam, vero optio consequuntur repudiandae et! Atque libero expedita laudantium cupiditate, sit explicabo sequi ipsa!"
+# tags = ["lorem", "ipsum"]
+# links = [
+#     {name = "website", url = "https://example.com"},
+#     {name = "github", url = "https://example.com"},
+#     {name = "docs", url = "https://example.com"},
+#     {name = "wiki", url = "https://example.com"},
+# ]
+
+# [[project]]
+# name = "lorem-ipsum"
+# desc = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi saepe dolor unde iusto dolore nam, vero optio consequuntur repudiandae et! Atque libero expedita laudantium cupiditate, sit explicabo sequi ipsa!"
+# tags = ["dolor", "lorem", "ipsum", "amet"]
+# links = [
+#     {name = "github", url = "https://example.com"},
+#     {name = "docs", url = "https://example.com"},
+# ]
+
+# [[project]]
+# name = "praesentium"
+# desc = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, nisi saepe dolor unde iusto dolore nam."
+# tags = ["lorem", "ipsum"]
+# img = "https://placehold.co/600x400"
+# links = [
+#     {name = "homepage", url = "https://example.com"},
+#     {name = "github", url = "https://example.com"},
+#     {name = "docs", url = "https://example.com"},
+# ]
