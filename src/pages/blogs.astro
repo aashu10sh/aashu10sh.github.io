@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getWriting } from '../lib/posts';
+
+const posts = await getWriting();
+---
+
+<Base title="Blog" description="Writing on software and systems.">
+	<h1>Blog</h1>
+	<p class="muted">{posts.length} posts. Browse by <a href="/tags">tag</a>, or see <a href="/books">books</a>.</p>
+	<PostList posts={posts} />
+</Base>

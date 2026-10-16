@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts, getTags, postUrl } from '../lib/posts';
+import { buildBloom, falsePositiveRate, getBit, normalizePath, toHex } from '../lib/bloom';
+
+// Every page the site serves: static routes are read from this folder, dynamic ones from the content.
+const staticRoutes = Object.keys(import.meta.glob('./**/*.{astro,ts}'))
+	.filter((file) => !file.includes('[') && !file.includes('404'))
+	.map((file) => normalizePath(file.slice(1).replace(/\.(astro|ts)$/, '').replace(/\/index$/, '')));
+const paths = [
+	...staticRoutes,
+	...(await getPosts()).map(postUrl),
+	...[...(await getTags()).keys()].map((tag) => `/tags/${tag}`),
+].map(normalizePath);
+
+const bloom = buildBloom([...new Set(paths)]);
+const fpr = falsePositiveRate(bloom);
+---
+
+<Base title="Not found">
+	<h1>404</h1>
+	<p>This page doesn't exist.</p>
+
+	<figure class="bloom" data-m={bloom.m} data-k={bloom.k} data-bits={toHex(bloom.bytes)} hidden>
+		<p class="mono request">GET <span class="path"></span></p>
+		<div class="grid" aria-hidden="true">
+			{Array.from({ length: bloom.m }, (_, i) => <i class={getBit(bloom.bytes, i) ? 'set' : undefined} />)}
+		</div>
+		<figcaption class="mono">
+			<span class="muted">
+				bloom filter of every page on this site · m={bloom.m} bits · k={bloom.k} hashes · n={bloom.n} pages · {
+					(fpr * 100).toFixed(1)
+				}% false positives
+			</span>
+			<span class="muted probes"></span>
+			<span class="verdict"></span>
+		</figcaption>
+	</figure>
+
+	<p class="muted explain" hidden>
+		A Bloom filter can never be sure something is there, only that it <em>might</em> be. But when it says
+		something isn't there, it's never wrong.
+	</p>
+
+	<p><a href="/">Home</a> · <a href="/blogs">Blog</a> · <a href="/books">Books</a></p>
+</Base>
+
+<script>
+	import { bitIndexes, fromHex, getBit, normalizePath } from '../lib/bloom';
+
+	const fig = document.querySelector<HTMLElement>('.bloom')!;
+	const m = Number(fig.dataset.m);
+	const k = Number(fig.dataset.k);
+	const bytes = fromHex(fig.dataset.bits!);
+	const cells = fig.querySelectorAll<HTMLElement>('.grid i');
+	const probesEl = fig.querySelector('.probes')!;
+	const verdict = fig.querySelector('.verdict')!;
+	const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	const path = normalizePath(location.pathname);
+	const probes = bitIndexes(path, m, k);
+	fig.querySelector('.path')!.textContent = path;
+	fig.hidden = false;
+	document.querySelector<HTMLElement>('.explain')!.hidden = false;
+
+	const finish = () => {
+		const zero = probes.find((i) => !getBit(bytes, i));
+		verdict.textContent =
+			zero === undefined
+				? `all ${k} bits are set → probably here… but it isn't. You hit a false positive.`
+				: `bit ${zero} is 0 → definitely not here`;
+	};
+
+	let shown = 0;
+	const probeNext = () => {
+		const i = probes[shown++];
+		const set = getBit(bytes, i);
+		cells[i].classList.add(set ? 'hit' : 'miss');
+		probesEl.textContent = `probes ${probes
+			.slice(0, shown)
+			.map((p) => `${p}${getBit(bytes, p) ? '' : '·0'}`)
+			.join(' ')}`;
+		// The first 0 already settles it, but keep going so all k probes are visible.
+		if (shown < probes.length) setTimeout(probeNext, reducedMotion ? 0 : 220);
+		else finish();
+	};
+	setTimeout(probeNext, reducedMotion ? 0 : 400);
+</script>
+
+<style>
+	.bloom {
+		margin: 2rem 0 1.5rem;
+	}
+	.request {
+		margin: 0 0 0.75rem;
+		overflow-wrap: anywhere;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(32, 9px);
+		gap: 3px;
+	}
+	.grid i {
+		width: 9px;
+		height: 9px;
+		border-radius: 2px;
+		border: 1px solid var(--line);
+		transition:
+			background 0.2s,
+			border-color 0.2s;
+	}
+	.grid i.set {
+		background: var(--line);
+	}
+	.grid i.hit {
+		background: var(--fg);
+		border-color: var(--fg);
+	}
+	.grid i.miss {
+		background: transparent;
+		border: 2px solid var(--fg);
+	}
+	figcaption {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		margin-top: 0.75rem;
+		font-size: 0.75rem;
+		overflow-wrap: anywhere;
+	}
+	.verdict {
+		font-weight: 600;
+		min-height: 1.5em;
+	}
+	@media (max-width: 520px) {
+		.grid {
+			grid-template-columns: repeat(16, 9px);
+		}
+	}
+</style>

@@ -1,0 +1,297 @@
+---
+import { build } from '../lib/build';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const site = 'Aashutosh Pudasaini';
+const {
+	title,
+	description = 'Backend engineer. Distributed systems, databases, and books.',
+} = Astro.props;
+const fullTitle = title ? `${title} · ${site}` : site;
+const path = Astro.url.pathname;
+const nav = [
+	{ href: '/blogs', label: 'blog', match: ['/blogs', '/blog/'] },
+	{ href: '/projects', label: 'projects', match: ['/projects'] },
+	{ href: '/books', label: 'books', match: ['/books'] },
+	{ href: '/tags', label: 'tags', match: ['/tags'] },
+	{ href: '/about', label: 'about', match: ['/about'] },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="alternate" type="application/rss+xml" title="Aashutosh Pudasaini" href="/rss.xml" />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		{Astro.site && <link rel="canonical" href={new URL(path, Astro.site)} />}
+	</head>
+	<body>
+		<header>
+			<a href="/" class="name">aashu10sh</a>
+			<nav>
+				{
+					nav.map(({ href, label, match }) => (
+						<a href={href} aria-current={match.some((m) => path.startsWith(m)) ? 'page' : undefined}>
+							{label}
+						</a>
+					))
+				}
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<span>© {new Date().getFullYear()} Aashutosh Pudasaini</span>
+			<span class="links">
+				<a href="https://github.com/aashu10sh">github</a>
+				<a href="https://www.linkedin.com/in/aashutosh-pudasaini">linkedin</a>
+				<a href="https://twitter.com/aashu10sh">twitter</a>
+				<a href="mailto:pudasainiashutosh@gmail.com">email</a>
+				<a href="/rss.xml">rss</a>
+			</span>
+			<span class="build mono">
+				built {build.date}{build.commit && <> from {build.commit}</>} · Kathmandu (UTC+05:45)
+			</span>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--bg: #ffffff;
+		--fg: #111111;
+		--muted: #6b6b6b;
+		--line: #ebebeb;
+		--code-bg: #f6f6f6;
+		--sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+		--mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+		color-scheme: light dark;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #0a0a0a;
+			--fg: #ededed;
+			--muted: #8f8f8f;
+			--line: #222222;
+			--code-bg: #161616;
+		}
+		.astro-code span {
+			color: var(--shiki-dark) !important;
+		}
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		margin: 0 auto;
+		max-width: 680px;
+		padding: 0 20px;
+		background: var(--bg);
+		color: var(--fg);
+		font: 16px/1.7 var(--sans);
+		-webkit-font-smoothing: antialiased;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		flex: 1;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: underline;
+		text-decoration-color: var(--line);
+		text-underline-offset: 3px;
+		transition: text-decoration-color 0.15s;
+	}
+	a:hover {
+		text-decoration-color: currentColor;
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		line-height: 1.25;
+	}
+	h1 {
+		font-size: 1.75rem;
+		margin: 0 0 0.5rem;
+	}
+	h2 {
+		font-size: 1.15rem;
+		margin: 2.5rem 0 0.75rem;
+	}
+	h3 {
+		font-size: 1rem;
+		margin: 2rem 0 0.5rem;
+	}
+
+	.muted {
+		color: var(--muted);
+	}
+
+	.mono,
+	code,
+	pre,
+	ul.posts time {
+		font-family: var(--mono);
+		font-size: 0.875em;
+	}
+
+	code {
+		background: var(--code-bg);
+		padding: 0.1em 0.35em;
+		border-radius: 4px;
+	}
+	pre {
+		background: var(--code-bg) !important;
+		padding: 1rem;
+		border-radius: 6px;
+		overflow-x: auto;
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	pre code {
+		background: none;
+		padding: 0;
+		font-size: 1em;
+	}
+
+	blockquote {
+		margin: 1.5rem 0;
+		padding-left: 1rem;
+		border-left: 2px solid var(--line);
+		color: var(--muted);
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		border-radius: 6px;
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--line);
+		margin: 2.5rem 0;
+	}
+
+	/* Header / footer */
+	body > header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+		padding: 40px 0 64px;
+	}
+	body > header a,
+	footer a {
+		text-decoration: none;
+	}
+	body > header .name {
+		font-weight: 600;
+		letter-spacing: -0.01em;
+	}
+	body > header nav,
+	footer .links {
+		display: flex;
+		gap: 20px;
+	}
+	body > header nav a,
+	footer {
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+	body > header nav a:hover,
+	body > header nav a[aria-current='page'],
+	footer a:hover {
+		color: var(--fg);
+	}
+	footer {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 12px;
+		padding: 64px 0 40px;
+	}
+	footer .build {
+		flex-basis: 100%;
+		font-size: 0.75rem;
+	}
+
+	/* Post list: date on the left, title on the right */
+	ul.posts {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	ul.posts li {
+		display: flex;
+		gap: 24px;
+		padding: 10px 0;
+		border-bottom: 1px solid var(--line);
+	}
+	ul.posts li:first-child {
+		border-top: 1px solid var(--line);
+	}
+	ul.posts time {
+		color: var(--muted);
+		flex-shrink: 0;
+		padding-top: 0.1em;
+	}
+	ul.posts a {
+		text-decoration: none;
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 14px;
+		font-family: var(--mono);
+		font-size: 0.8rem;
+		color: var(--muted);
+	}
+	.tags a {
+		text-decoration: none;
+	}
+	.tags a:hover {
+		color: var(--fg);
+	}
+
+	@media (max-width: 520px) {
+		body > header {
+			padding: 24px 0 40px;
+		}
+		body > header nav {
+			gap: 16px;
+		}
+		ul.posts li {
+			flex-direction: column;
+			gap: 0;
+		}
+	}
+</style>

@@ -1,16 +1,43 @@
 ---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import RaftCluster from '../components/RaftCluster.astro';
+import { getWriting } from '../lib/posts';
+
+const recent = (await getWriting()).slice(0, 5);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+	<section class="intro">
+		<div>
+			<h1>Aashutosh Pudasaini</h1>
+			<p class="muted">
+				Backend engineer from Kathmandu, Nepal. I think about distributed systems, databases, and the Linux
+				kernel, mostly in Go. Sometimes I write about <a href="/books">books</a>.
+			</p>
+		</div>
+		<RaftCluster />
+	</section>
+
+	<h2>Recent writing</h2>
+	<PostList posts={recent} />
+	<p><a href="/blogs" class="muted">All posts →</a></p>
+</Base>
+
+<style>
+	.intro {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+	}
+	@media (max-width: 520px) {
+		.intro {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 16px;
+		}
+		.intro :global(.raft) {
+			align-self: center;
+		}
+	}
+</style>

@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+
+const projects = [
+	{
+		name: 'p2pchat',
+		desc: 'Discord/Slack-like peer-to-peer chat for a local subnet. Nodes discover each other over mDNS and talk over gRPC, with file transfer and WebRTC video calls.',
+		stack: ['Go', 'gRPC', 'mDNS', 'WebRTC', 'Svelte'],
+		url: 'https://github.com/aashu10sh/p2pchat',
+	},
+	{
+		name: 'Sotera',
+		desc: 'Fingerprint-based password manager. Your fingerprint unlocks a dashboard where you manage your passwords.',
+		stack: ['FastAPI', 'Svelte'],
+		url: 'https://github.com/aashu10sh/sotera',
+	},
+	{
+		name: 'Vault',
+		desc: 'Blockchain-based KYC verification and storage platform. Submitted to ETHGlobal Hackathon 2024.',
+		stack: ['Ethereum', 'TypeScript'],
+		url: 'https://github.com/deerwalk-blockchain-community/vault',
+	},
+	{
+		name: 'Urlify',
+		desc: 'Open-source URL shortener with authentication, an alternative to bit.ly.',
+		stack: ['SvelteKit', 'Hono', 'Postgres'],
+		url: 'https://github.com/aashu10sh/urlify',
+	},
+];
+---
+
+<Base title="Projects" description="Things I've built.">
+	<h1>Projects</h1>
+	<p class="muted">Things I've built. More on <a href="https://github.com/aashu10sh">GitHub</a>.</p>
+	<dl class="projects">
+		{
+			projects.map((p) => (
+				<div>
+					<dt>
+						<a href={p.url}>{p.name}</a>
+					</dt>
+					<dd>
+						{p.desc}
+						<span class="tags">{p.stack.map((s) => <span>{s}</span>)}</span>
+					</dd>
+				</div>
+			))
+		}
+	</dl>
+</Base>
+
+<style>
+	.projects {
+		margin: 0;
+	}
+	.projects div {
+		padding: 12px 0;
+		border-bottom: 1px solid var(--line);
+	}
+	.projects div:first-child {
+		border-top: 1px solid var(--line);
+	}
+	.projects dt {
+		font-weight: 600;
+	}
+	.projects dd {
+		margin: 0;
+		color: var(--muted);
+	}
+	.projects .tags {
+		margin-top: 4px;
+	}
+</style>

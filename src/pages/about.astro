@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+
+const work = [
+	{
+		label: 'now',
+		text: 'Software Engineer II at Leapfrog Technology, building Go services for financial-crime detection at a UK neobank.',
+	},
+	{
+		label: 'before',
+		text: 'Lead Software Engineer at Deerwalk Group; backend roles at Stoik Digital and Luminr.',
+	},
+	{
+		label: 'community',
+		text: 'Core organizer at CNCF Kathmandu; led',
+		link: { text: 'DeerHack 2024', url: '/blog/deerhack24' },
+	},
+];
+---
+
+<Base title="About">
+	<h1>About</h1>
+	<p>
+		I'm a software engineer from Kathmandu, Nepal. In my spare time I enjoy working on meaningful side
+		projects, contributing to open source (trying to), and reading philosophy. I'm deeply interested in
+		distributed systems, databases, cybersecurity, and the Linux kernel, with a soft spot for Go. On this
+		site I write about projects I'm working on and topics that keep me up at night.
+	</p>
+
+	<h2>Work</h2>
+	<ul class="posts work">
+		{
+			work.map((w) => (
+				<li>
+					<span class="mono muted">{w.label}</span>
+					<span>
+						{w.text}
+						{w.link && <>{' '}<a href={w.link.url}>{w.link.text}</a>.</>}
+					</span>
+				</li>
+			))
+		}
+	</ul>
+
+	<h2>Elsewhere</h2>
+	<ul class="links">
+		<li><span class="mono muted">github</span> <a href="https://github.com/aashu10sh">aashu10sh</a></li>
+		<li>
+			<span class="mono muted">linkedin</span>
+			<a href="https://www.linkedin.com/in/aashutosh-pudasaini">aashutosh-pudasaini</a>
+		</li>
+		<li><span class="mono muted">twitter</span> <a href="https://twitter.com/aashu10sh">@aashu10sh</a></li>
+		<li>
+			<span class="mono muted">email</span>
+			<a href="mailto:pudasainiashutosh@gmail.com">pudasainiashutosh@gmail.com</a>
+		</li>
+	</ul>
+</Base>
+
+<style>
+	.links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.links li {
+		display: flex;
+		gap: 24px;
+	}
+	.links a {
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+	.links .mono {
+		flex-shrink: 0;
+		width: 80px;
+		padding-top: 0.1em;
+	}
+	.work .mono {
+		flex-shrink: 0;
+		width: 80px;
+		padding-top: 0.1em;
+	}
+</style>

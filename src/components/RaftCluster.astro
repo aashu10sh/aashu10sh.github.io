@@ -1,0 +1,357 @@
+---
+// A five-node Raft cluster running leader election in the browser. Click a node to crash or restart it.
+---
+
+<figure class="raft">
+	<svg viewBox="-80 -80 160 160" width="160" height="160" role="group" aria-label="Five-node Raft cluster">
+		<g class="edges"></g>
+		<g class="packets"></g>
+		<g class="nodes"></g>
+	</svg>
+	<figcaption class="mono">
+		<span class="status">&nbsp;</span>
+		<span class="muted">click a node to crash it</span>
+	</figcaption>
+</figure>
+
+<script>
+	type Role = 'follower' | 'candidate' | 'leader';
+	type Msg =
+		| { type: 'vote-req'; term: number }
+		| { type: 'vote-res'; term: number; granted: boolean }
+		| { type: 'append'; term: number }
+		| { type: 'append-res'; term: number };
+
+	interface RaftNode {
+		id: number;
+		up: boolean;
+		role: Role;
+		// Persistent state: survives a crash, as Raft requires.
+		term: number;
+		votedFor: number | null;
+		// Volatile state: lost on crash.
+		votes: Set<number>;
+		deadline: number;
+		nextHeartbeat: number;
+		el: SVGGElement;
+		view: string;
+	}
+
+	interface Packet {
+		from: number;
+		to: number;
+		msg: Msg;
+		sent: number;
+		arrive: number;
+		el?: SVGCircleElement;
+	}
+
+	const N = 5;
+	const QUORUM = Math.floor(N / 2) + 1;
+	const HEARTBEAT_MS = 700;
+	const LATENCY_MS: [number, number] = [250, 450];
+	// Spread much wider than LATENCY_MS, so one node usually times out and wins before the others wake up.
+	const ELECTION_TIMEOUT_MS: [number, number] = [2500, 5000];
+	const FIRST_TIMEOUT_MS: [number, number] = [600, 2600];
+	// When nobody is interacting, crash the leader now and then so visitors see an election.
+	const CHAOS_EVERY_MS: [number, number] = [12000, 20000];
+	const CHAOS_DOWNTIME_MS = 5000;
+	const IDLE_BEFORE_CHAOS_MS = 30000;
+
+	const rand = ([lo, hi]: [number, number]) => lo + Math.random() * (hi - lo);
+	const SVG_NS = 'http://www.w3.org/2000/svg';
+	const svgEl = <K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number>) => {
+		const el = document.createElementNS(SVG_NS, tag);
+		for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v));
+		return el;
+	};
+
+	for (const root of document.querySelectorAll<HTMLElement>('.raft')) {
+		const svg = root.querySelector('svg')!;
+		const edgesG = svg.querySelector('.edges')!;
+		const packetsG = svg.querySelector('.packets')!;
+		const nodesG = svg.querySelector('.nodes')!;
+		const status = root.querySelector('.status')!;
+		const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+		const pos = Array.from({ length: N }, (_, i) => {
+			const a = -Math.PI / 2 + (i * 2 * Math.PI) / N;
+			return { x: 52 * Math.cos(a), y: 52 * Math.sin(a), lx: 70 * Math.cos(a), ly: 70 * Math.sin(a) };
+		});
+
+		for (let i = 0; i < N; i++) {
+			for (let j = i + 1; j < N; j++) {
+				edgesG.append(svgEl('line', { x1: pos[i].x, y1: pos[i].y, x2: pos[j].x, y2: pos[j].y }));
+			}
+		}
+
+		let now = 0;
+		let lastInteraction = -Infinity;
+		let nextChaos = rand(CHAOS_EVERY_MS);
+		const autoRestart = new Map<number, number>();
+		let packets: Packet[] = [];
+
+		const nodes: RaftNode[] = pos.map((p, id) => {
+			const el = svgEl('g', { class: 'node', tabindex: 0, role: 'button' });
+			el.append(
+				svgEl('circle', { cx: p.x, cy: p.y, r: 8 }),
+				svgEl('path', { class: 'x', d: `M${p.x - 4} ${p.y - 4}l8 8m0 -8l-8 8` }),
+			);
+			const label = svgEl('text', { x: p.lx, y: p.ly, 'text-anchor': 'middle', 'dominant-baseline': 'middle' });
+			label.textContent = `n${id + 1}`;
+			el.append(label);
+			nodesG.append(el);
+			return {
+				id,
+				up: true,
+				role: 'follower',
+				term: 0,
+				votedFor: null,
+				votes: new Set(),
+				deadline: rand(FIRST_TIMEOUT_MS),
+				nextHeartbeat: 0,
+				el,
+				view: '',
+			};
+		});
+
+		const resetElectionTimer = (n: RaftNode) => (n.deadline = now + rand(ELECTION_TIMEOUT_MS));
+
+		const send = (from: number, to: number, msg: Msg) => {
+			if (!nodes[from].up) return;
+			packets.push({ from, to, msg, sent: now, arrive: now + rand(LATENCY_MS) });
+		};
+		const broadcast = (from: number, msg: Msg) => nodes.forEach((n) => n.id !== from && send(from, n.id, msg));
+
+		const startElection = (n: RaftNode) => {
+			n.term++;
+			n.role = 'candidate';
+			n.votedFor = n.id;
+			n.votes = new Set([n.id]);
+			resetElectionTimer(n);
+			broadcast(n.id, { type: 'vote-req', term: n.term });
+		};
+
+		const deliver = ({ from, to, msg }: Packet) => {
+			const n = nodes[to];
+			if (!n.up) return; // a crashed node drops everything
+			if (msg.term > n.term) {
+				if (n.role === 'leader') resetElectionTimer(n);
+				n.term = msg.term;
+				n.role = 'follower';
+				n.votedFor = null;
+			}
+			switch (msg.type) {
+				case 'vote-req': {
+					// No log in this demo, so every candidate's log is trivially up to date.
+					const granted = msg.term === n.term && (n.votedFor === null || n.votedFor === from);
+					if (granted) {
+						n.votedFor = from;
+						resetElectionTimer(n);
+					}
+					send(n.id, from, { type: 'vote-res', term: n.term, granted });
+					break;
+				}
+				case 'vote-res':
+					if (n.role === 'candidate' && msg.term === n.term && msg.granted) {
+						n.votes.add(from);
+						if (n.votes.size >= QUORUM) {
+							n.role = 'leader';
+							n.nextHeartbeat = now;
+						}
+					}
+					break;
+				case 'append':
+					if (msg.term === n.term) {
+						n.role = 'follower';
+						resetElectionTimer(n);
+					}
+					send(n.id, from, { type: 'append-res', term: n.term });
+					break;
+				case 'append-res':
+					break; // only the term check above matters for heartbeats
+			}
+		};
+
+		const crash = (n: RaftNode) => {
+			n.up = false;
+			n.role = 'follower';
+			n.votes = new Set();
+		};
+		const restart = (n: RaftNode) => {
+			n.up = true;
+			resetElectionTimer(n);
+		};
+
+		const toggle = (n: RaftNode) => {
+			lastInteraction = now;
+			autoRestart.delete(n.id);
+			n.up ? crash(n) : restart(n);
+		};
+		for (const n of nodes) {
+			n.el.addEventListener('click', () => toggle(n));
+			n.el.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					toggle(n);
+				}
+			});
+		}
+
+		const leader = () =>
+			nodes.filter((n) => n.up && n.role === 'leader').sort((a, b) => b.term - a.term)[0] as RaftNode | undefined;
+
+		const step = () => {
+			const arrived = packets.filter((p) => p.arrive <= now);
+			packets = packets.filter((p) => p.arrive > now);
+			for (const p of arrived) {
+				p.el?.remove();
+				deliver(p);
+			}
+
+			for (const n of nodes) {
+				if (!n.up) continue;
+				if (n.role === 'leader') {
+					if (now >= n.nextHeartbeat) {
+						broadcast(n.id, { type: 'append', term: n.term });
+						n.nextHeartbeat = now + HEARTBEAT_MS;
+					}
+				} else if (now >= n.deadline) {
+					startElection(n);
+				}
+			}
+
+			for (const [id, at] of autoRestart) {
+				if (now >= at) {
+					autoRestart.delete(id);
+					restart(nodes[id]);
+				}
+			}
+			const l = leader();
+			if (now >= nextChaos && now - lastInteraction > IDLE_BEFORE_CHAOS_MS && l && nodes.every((n) => n.up)) {
+				crash(l);
+				autoRestart.set(l.id, now + CHAOS_DOWNTIME_MS);
+				nextChaos = now + rand(CHAOS_EVERY_MS);
+			}
+		};
+
+		let statusText = '';
+		const render = () => {
+			for (const n of nodes) {
+				const view = n.up ? n.role : 'down';
+				if (view === n.view) continue;
+				n.view = view;
+				n.el.setAttribute('class', `node ${view}`);
+				n.el.setAttribute('aria-label', `n${n.id + 1}, ${view}. ${n.up ? 'Crash' : 'Restart'} this node.`);
+			}
+
+			for (const p of packets) {
+				if (reducedMotion.matches) continue;
+				if (!p.el) {
+					const kind = p.msg.type.startsWith('vote') ? 'vote' : 'heartbeat';
+					p.el = svgEl('circle', { r: 2, class: kind });
+					packetsG.append(p.el);
+				}
+				const t = Math.min(1, (now - p.sent) / (p.arrive - p.sent));
+				const a = pos[p.from];
+				const b = pos[p.to];
+				p.el.setAttribute('cx', String(a.x + (b.x - a.x) * t));
+				p.el.setAttribute('cy', String(a.y + (b.y - a.y) * t));
+			}
+			if (reducedMotion.matches) packetsG.replaceChildren();
+
+			const up = nodes.filter((n) => n.up).length;
+			const term = Math.max(...nodes.filter((n) => n.up).map((n) => n.term), 0);
+			const l = leader();
+			const state = l ? `leader n${l.id + 1}` : up >= QUORUM ? 'electing…' : `no quorum`;
+			const text = `term ${term} · ${state} · ${up}/${N} up`;
+			if (text !== statusText) status.textContent = statusText = text;
+		};
+
+		let last = performance.now();
+		const frame = (t: number) => {
+			// Cap the step so a backgrounded tab resumes calmly instead of replaying a burst of timeouts.
+			now += Math.min(t - last, 100);
+			last = t;
+			step();
+			render();
+			requestAnimationFrame(frame);
+		};
+		requestAnimationFrame(frame);
+	}
+</script>
+
+<style>
+	.raft {
+		margin: 0;
+		flex-shrink: 0;
+		width: 180px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 4px;
+	}
+	svg {
+		overflow: visible;
+		user-select: none;
+	}
+	figcaption {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: 0.7rem;
+		line-height: 1.5;
+		text-align: center;
+		white-space: nowrap;
+	}
+	.raft :global(.edges line) {
+		stroke: var(--line);
+		stroke-width: 1;
+	}
+	.raft :global(.node) {
+		cursor: pointer;
+		outline: none;
+	}
+	.raft :global(.node circle) {
+		fill: var(--bg);
+		stroke: var(--muted);
+		stroke-width: 1.5;
+		transition:
+			fill 0.2s,
+			stroke 0.2s;
+	}
+	.raft :global(.node text) {
+		fill: var(--muted);
+		font: 8px var(--mono);
+	}
+	.raft :global(.node .x) {
+		stroke: var(--muted);
+		stroke-width: 1.2;
+		display: none;
+	}
+	.raft :global(.node.leader circle) {
+		fill: var(--fg);
+		stroke: var(--fg);
+	}
+	.raft :global(.node.candidate circle) {
+		stroke: var(--fg);
+		stroke-dasharray: 3 2;
+	}
+	.raft :global(.node.down) {
+		opacity: 0.35;
+	}
+	.raft :global(.node.down .x) {
+		display: block;
+	}
+	.raft :global(.node:hover circle),
+	.raft :global(.node:focus-visible circle) {
+		stroke: var(--fg);
+		stroke-width: 2.5;
+	}
+	.raft :global(.packets .heartbeat) {
+		fill: var(--muted);
+	}
+	.raft :global(.packets .vote) {
+		fill: var(--fg);
+	}
+</style>

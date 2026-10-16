@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.4.0"
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^7.4.0",
+    "lightense-images": "^1.0.17"
   }
 }

@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getTags } from '../../lib/posts';
+
+const tags = await getTags();
+---
+
+<Base title="Tags">
+	<h1>Tags</h1>
+	<p class="muted">{tags.size} tags.</p>
+	<ul class="posts">
+		{
+			[...tags].map(([tag, posts]) => (
+				<li>
+					<a href={`/tags/${tag}`} class="tag">#{tag}</a>
+					<span class="muted mono">{posts.length}</span>
+				</li>
+			))
+		}
+	</ul>
+</Base>
+
+<style>
+	li {
+		justify-content: space-between;
+		flex-direction: row !important;
+	}
+	.tag {
+		font-family: var(--mono);
+		font-size: 0.9rem;
+	}
+</style>
