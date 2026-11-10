@@ -12,8 +12,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.7",
+    "@astrojs/mdx": "^8.1.4",
+    "@astrojs/react": "^7.1.7",
     "@astrojs/rss": "^4.0.19",
-    "astro": "^7.4.0",
-    "lightense-images": "^1.0.17"
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "astro": "~7.4.1",
+    "lightense-images": "^1.0.17",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   }
 }

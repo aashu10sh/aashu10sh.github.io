@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 
 // Book reviews that lived under /blog/ on the old Zola site before moving to /books/.
 const legacyBooks = [
@@ -34,5 +36,11 @@ export default defineConfig({
 		shikiConfig: {
 			themes: { light: 'github-light', dark: 'github-dark' },
 		},
+	},
+	integrations: [react(), mdx()],
+	vite: {
+		// @astrojs/react 7.1.7 on astro 7.4.1 doesn't pre-bundle React's CJS entry points in dev,
+		// which breaks hydration with "does not provide an export named 'createRoot'".
+		optimizeDeps: { include: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime'] },
 	},
 });
