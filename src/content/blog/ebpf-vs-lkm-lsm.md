@@ -27,4 +27,10 @@ Ok, so how do you **safely** run code in the kernel space?
 We have two primary ways? the newer eBPF and the traditional LKM.
 
 ## LKM
-LKM stands for Linux Kernel Module and it has been the 
+LKM stands for Linux Kernel Module and the Linux Kernel has had loadable modules since the mid 1990s. They have been the traditional way of running code in the kernel space for the longest time, it was the default way. Before kernel modules, every driver you needed had to be compiled into one big kernel image which was not very efficient for a development perspective. Kernel modules let the kernel stay lean and load code only when needed, for example when you plug in your hardware. LKM are mostly used to implement device drivers but they can also be used to implement network protocols, crypto libraries, rootkits and SIEM systems. 
+
+The biggest problem by far with Linux Kernel modules is that they could potentially corrupt the kernel memory and cause unexpected behaviour. When a kernel module de-references a bad pointer it causes an kernel oops and the kernel logs a stack trace, kills the task that was running and keeps going but now the its "tainted" and may be unstable. The kernel might run into a full panic if the if the earlier fault happens to interrupt the context in a critical path or if `panic_on_oops` is set. The quieter failures like memory corruption, deadlocks and leaks stay around even after you unload the module.
+
+Linux Kernel Modules also don't have a stable in-kernel API and an out-of-tree module can break with any kernel update and must be rebuilt for every version. This is why DKMS exists and why Nvidia, ZFS and Virtualbox run into problems after upgrading. Many Kernel symbols are also `EXPORT_SYMBOL_GPL` so only GPL-licensed modules can use them.
+
+## eBPF
