@@ -5,6 +5,8 @@ description: "In this blog I dive into the various ways one might interact with 
 tags: ["tech", "linux"]
 ---
 
+import EbpfPipeline from '../../components/EbpfPipeline/EbpfPipeline.tsx';
+
 You want to run some code at the kernel mode ( ring 0 ), do you? 
 > When I say "kernel mode" I mean code running with kernel privileges, in kernel context with access to kernel memory. 
 
@@ -34,3 +36,30 @@ The biggest problem by far with Linux Kernel modules is that they could potentia
 Linux Kernel Modules also don't have a stable in-kernel API and an out-of-tree module can break with any kernel update and must be rebuilt for every version. This is why DKMS exists and why Nvidia, ZFS and Virtualbox run into problems after upgrading. Many Kernel symbols are also `EXPORT_SYMBOL_GPL` so only GPL-licensed modules can use them.
 
 ## eBPF
+eBPF stands for Extended Berkeley Packet filter and it is an extension to the classic BPF which was a tiny virtual machine for filtering packets ( fun fact: tcp dump uses bpf ). eBPF was introduced to the linux kernel in kernel 3.18, it moved to 64 bit registers and added maps, helper functions and many other hook types beyond just packets. Today, eBPF is more than just the packet filtering tool it was originally created to be, it does a lot of things.
+
+This is how you would run a eBPF program:
+
+1. Write your kernel side program ( normally in restricted C, or in rust with the aya framework which is also quite nice). 
+2. Compile the kernel space program with llvm(clang for c and rustc for rust) to eBPF bytecode, which produces an ELF object.
+3. Your loader loads the program in kernel space with the `bpf()` syscall.
+4. The verifier which is inside the kernel checks the bytecode, 
+> The verifier does more than just check for unbounded loops and recursions, it walks every possible path and does memory access bound checks, stack size checks and ensures type-correct calls.
+5. The JIT compiler inside the kernel compiles it to native machine code ( some kernels also have a interpreter for fallback )
+6. Your loader attaches it to a hook, where it runs every time it fires.
+7. You also write a user-space loader which communicates with its kernel space counterpart and exchanges information using maps or ring-buffers.
+
+<EbpfPipeline client:visible />
+
+As you can see eBPF has better restrictions, better primitives and a really good ecosystem with tools like tetragon and cillium leading the way.
+
+## The Successor
+For most use-cases, it would not be far-fetched to call eBPF the successor to LKM. It works perfectly for 90% of LKM's use-cases while providing user's with a modern, safer system. eBPF's verifier makes it impossible for an eBPF program to taint the system and potentially corrupt the kernel and cause a full-blown panic. eBPF's "Co-RE" (Compile once, run everywhere) architecture is also a key reason why eBPF is better for modern systems because with eBPF users don't have to recompile for every kernel version. Linux modules are established a rootkit vector in the industry, well known LKM rootkits have existed in the industry for decades. An eBPF program on the other hand is limited but not harmless, if a bad actor uses eBPF primitives to do something malicious then eBPF modules can be misused.
+
+## A case for LKM
+LKM's are still widely used and very powerful because an eBPF program can extend the kernel where the kernel has provided a hook or an interface for it. A kernel module on the other hand can extend the kernel anywhere. The main use-case for an LKM is still device drivers, you cannot yet reliably use eBPF for device drivers. Long running background work, self-implemented kernel threads or very complex logic that exceeds the verifier limit are still good use-cases for a Linux Kernel. eBPF's architecture is best suited when you have to do some task in reaction to an event in a system, if you need to change kernel behaviour where no hooks, helper functions, or kfunc exists, eBPF cannot do it. I think using rust to implement kernel modules is a good really way to build kernel modules because of rust's memory model and advanced safety features eliminate potential trivial bugs like nil pointer defer, use after free, double free at compile time, giving you kernel module extra security.
+
+## Conclusion
+Ok, you clearly want to do this, I see you! ask yourself this question "does this need to be in the kernel space?" if it does not, great! write something in user land. If your answer to the previous question was yes then ask yourself another question "is there a hook for what I am trying to achieve? ( is my action in-reaction to an event? )?" if your answer is yes ( which it will be for 90% of the time) use eBPF and if not use Kernel Modules ( in rust if possible ).
+
+ok bye

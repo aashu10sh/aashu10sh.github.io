@@ -1,0 +1,464 @@
+/* Interactive eBPF vs kernel module pipeline. Uses the site's tokens from Base.astro. */
+
+.ebpf-demo {
+	--eb-bad: #c8382d;
+	--eb-accent-bg: color-mix(in srgb, var(--fg) 6%, var(--bg));
+	margin: 2rem 0;
+	padding: 16px;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	font-family: var(--sans);
+}
+@media (prefers-color-scheme: dark) {
+	.ebpf-demo {
+		--eb-bad: #ff6b5e;
+	}
+}
+@media (min-width: 760px) {
+	/* Let the figure breathe a little past the text column on wide screens. */
+	.ebpf-demo {
+		margin-left: -24px;
+		margin-right: -24px;
+	}
+}
+
+.ebpf-demo button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+}
+.ebpf-demo button:disabled {
+	cursor: default;
+	opacity: 0.35;
+}
+.ebpf-demo button:focus-visible {
+	outline: 2px solid var(--fg);
+	outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------- controls */
+
+.eb-controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 20px;
+	margin-bottom: 12px;
+}
+.eb-seg {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+.eb-seg-label {
+	font: 0.7rem var(--mono);
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+.eb-seg-opts {
+	display: inline-flex;
+	border: 1px solid var(--line);
+	border-radius: 7px;
+	padding: 2px;
+	gap: 2px;
+}
+.ebpf-demo .eb-seg-opts button {
+	font: 0.75rem var(--mono);
+	padding: 3px 9px;
+	border-radius: 5px;
+	color: var(--muted);
+	transition:
+		background 0.15s,
+		color 0.15s;
+}
+.ebpf-demo .eb-seg-opts button:hover {
+	color: var(--fg);
+}
+.ebpf-demo .eb-seg-opts button[aria-checked='true'] {
+	background: var(--fg);
+	color: var(--bg);
+}
+
+/* --------------------------------------------------------------- svg */
+
+.eb-svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+	user-select: none;
+}
+.eb-kernel-band {
+	fill: var(--code-bg);
+}
+.eb-boundary {
+	stroke: var(--muted);
+	stroke-width: 1;
+	stroke-dasharray: 4 4;
+	opacity: 0.6;
+}
+.eb-zone {
+	font: 10px var(--mono);
+	fill: var(--muted);
+	letter-spacing: 0.04em;
+}
+.eb-small {
+	font-size: 9px;
+}
+
+.eb-path {
+	fill: none;
+	stroke: var(--line);
+	stroke-width: 1.5;
+	transition: stroke 0.3s;
+}
+.eb-path.on {
+	stroke: var(--muted);
+}
+.eb-path.bad {
+	stroke: var(--eb-bad);
+	stroke-dasharray: 4 3;
+}
+.eb-arrowhead {
+	fill: var(--muted);
+}
+.eb-plabel {
+	font: 9px var(--mono);
+	fill: var(--muted);
+}
+
+.eb-box rect {
+	fill: var(--bg);
+	stroke: var(--line);
+	stroke-width: 1.25;
+	transition:
+		stroke 0.3s,
+		fill 0.3s,
+		opacity 0.3s;
+}
+.eb-box text {
+	transition: fill 0.3s;
+}
+.eb-title {
+	font: 600 12px var(--mono);
+	fill: var(--fg);
+}
+.eb-sub {
+	font: 10px var(--mono);
+	fill: var(--muted);
+}
+.eb-box.pending {
+	opacity: 0.45;
+}
+.eb-box.dim {
+	opacity: 0.2;
+}
+.eb-box.done rect {
+	stroke: var(--muted);
+}
+.eb-box.active rect {
+	stroke: var(--fg);
+	stroke-width: 1.75;
+	fill: var(--eb-accent-bg);
+}
+.eb-box.busy rect {
+	fill: color-mix(in srgb, var(--fg) 16%, var(--bg));
+}
+.eb-box.bad rect {
+	stroke: var(--eb-bad);
+	stroke-width: 2;
+	fill: color-mix(in srgb, var(--eb-bad) 10%, var(--bg));
+}
+.eb-box.bad .eb-sub {
+	fill: var(--eb-bad);
+}
+.eb-box.ghost rect {
+	stroke-dasharray: 4 3;
+	fill: transparent;
+}
+.eb-box.ghost text {
+	fill: var(--muted);
+}
+.eb-strike {
+	stroke: var(--muted);
+	stroke-width: 1.25;
+}
+
+.eb-token circle {
+	fill: var(--fg);
+}
+.eb-token.read circle {
+	fill: var(--muted);
+}
+.eb-token.bad circle {
+	fill: var(--eb-bad);
+}
+.eb-token text {
+	font: 600 9px var(--mono);
+	fill: var(--fg);
+	paint-order: stroke;
+	stroke: var(--bg);
+	stroke-width: 3px;
+	stroke-linejoin: round;
+}
+.eb-token.bad text {
+	fill: var(--eb-bad);
+}
+
+.eb-crashed .eb-kernel-band {
+	fill: color-mix(in srgb, var(--eb-bad) 9%, var(--code-bg));
+	animation: eb-flash 1.2s ease-out;
+}
+.eb-crash-text {
+	font: 600 11px var(--mono);
+	fill: var(--eb-bad);
+}
+@keyframes eb-flash {
+	0%,
+	30% {
+		fill: color-mix(in srgb, var(--eb-bad) 30%, var(--code-bg));
+	}
+}
+
+/* --------------------------------------------------------- transport */
+
+.eb-transport {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 12px;
+	flex-wrap: wrap;
+}
+.eb-buttons {
+	display: flex;
+	gap: 4px;
+}
+.ebpf-demo .eb-buttons button {
+	width: 30px;
+	height: 30px;
+	border: 1px solid var(--line);
+	border-radius: 7px;
+	font: 0.8rem var(--mono);
+	display: grid;
+	place-items: center;
+}
+.ebpf-demo .eb-buttons button:not(:disabled):hover {
+	border-color: var(--muted);
+}
+.ebpf-demo .eb-buttons .eb-play {
+	background: var(--fg);
+	color: var(--bg);
+	border-color: var(--fg);
+	font-size: 0.65rem;
+}
+
+.eb-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ebpf-demo .eb-steps button {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font: 0.72rem var(--mono);
+	color: var(--muted);
+	padding: 3px 8px 3px 4px;
+	border-radius: 999px;
+	border: 1px solid transparent;
+	transition:
+		color 0.15s,
+		border-color 0.15s;
+}
+.ebpf-demo .eb-steps button:not(:disabled):hover {
+	color: var(--fg);
+}
+.ebpf-demo .eb-steps button.done {
+	color: var(--fg);
+}
+.ebpf-demo .eb-steps button[aria-current='step'] {
+	color: var(--fg);
+	border-color: var(--fg);
+}
+.eb-num {
+	display: inline-grid;
+	place-items: center;
+	width: 17px;
+	height: 17px;
+	border-radius: 50%;
+	font-size: 0.62rem;
+	border: 1px solid currentColor;
+}
+.eb-steps button.done .eb-num,
+.eb-steps button[aria-current='step'] .eb-num {
+	background: var(--fg);
+	color: var(--bg);
+	border-color: var(--fg);
+}
+
+.ebpf-demo p.eb-caption {
+	margin: 14px 0 12px;
+	min-height: 3.4em;
+	font-size: 0.92rem;
+	line-height: 1.6;
+	hyphens: none !important;
+}
+
+/* ------------------------------------------------------------ detail */
+
+.eb-detail {
+	border-top: 1px solid var(--line);
+	padding-top: 12px;
+	min-height: 220px;
+}
+.eb-detail-title {
+	font: 0.68rem var(--mono);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--muted);
+	margin-bottom: 8px;
+}
+.ebpf-demo pre.eb-code {
+	margin: 0;
+	font-size: 0.74rem;
+	line-height: 1.6;
+	white-space: pre;
+	padding: 10px 12px;
+}
+.eb-code > div {
+	transition: opacity 0.25s;
+	padding: 0 4px;
+	margin: 0 -4px;
+	border-radius: 3px;
+}
+.eb-code .hidden,
+.eb-checks .hidden,
+.eb-jit .hidden,
+.eb-verdict.hidden {
+	opacity: 0;
+}
+.eb-code .bad {
+	color: var(--eb-bad);
+	background: color-mix(in srgb, var(--eb-bad) 10%, transparent);
+}
+.eb-code .cursor {
+	background: color-mix(in srgb, var(--fg) 10%, transparent);
+}
+.eb-ln {
+	display: inline-block;
+	width: 2.4em;
+	color: var(--muted);
+	user-select: none;
+}
+.eb-verifier .eb-insn {
+	display: inline-block;
+	min-width: 28ch;
+}
+.eb-note {
+	color: var(--muted);
+}
+.eb-verifier .bad .eb-note {
+	color: var(--eb-bad);
+}
+.eb-verdict {
+	margin-top: 8px;
+	font: 0.78rem var(--mono);
+	transition: opacity 0.25s;
+}
+.eb-verdict.bad {
+	color: var(--eb-bad);
+}
+
+.eb-checks {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font: 0.8rem/1.6 var(--mono);
+}
+.eb-checks li {
+	display: flex;
+	gap: 10px;
+	padding: 5px 0;
+	border-bottom: 1px solid var(--line);
+	transition: opacity 0.25s;
+}
+.eb-checks li.bad {
+	color: var(--eb-bad);
+}
+.eb-mark {
+	flex-shrink: 0;
+	width: 1em;
+	text-align: center;
+}
+
+.eb-jit {
+	display: grid;
+	gap: 6px;
+	font-size: 0.8rem;
+}
+.eb-jit > div {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+	gap: 10px;
+	align-items: center;
+	transition: opacity 0.25s;
+}
+.eb-jit code {
+	white-space: pre;
+	overflow-x: auto;
+}
+.eb-arrowtxt {
+	color: var(--muted);
+	font-family: var(--mono);
+}
+
+.eb-table {
+	width: 100%;
+	max-width: 320px;
+	border-collapse: collapse;
+	font: 0.8rem var(--mono);
+}
+.eb-table th,
+.eb-table td {
+	text-align: left;
+	padding: 4px 0;
+	border-bottom: 1px solid var(--line);
+}
+.eb-table th {
+	color: var(--muted);
+	font-weight: 400;
+}
+.eb-table td:last-child,
+.eb-table th:last-child {
+	text-align: right;
+}
+
+.ebpf-demo .eb-action {
+	margin-top: 12px;
+	font: 0.78rem var(--mono);
+	padding: 5px 12px;
+	border: 1px solid var(--fg);
+	border-radius: 7px;
+	transition:
+		background 0.15s,
+		color 0.15s;
+}
+.ebpf-demo .eb-action:hover {
+	background: var(--fg);
+	color: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ebpf-demo *,
+	.ebpf-demo *::before {
+		transition: none !important;
+		animation: none !important;
+	}
+}
