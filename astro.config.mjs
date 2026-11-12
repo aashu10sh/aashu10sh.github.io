@@ -21,8 +21,8 @@ const legacyBooks = [
 // https://astro.build/config
 export default defineConfig({
 	// The site's public URL: canonical links, RSS links and feed image URLs all derive from this.
-	// Switch it to the custom domain once one is set up.
-	site: 'https://aashu10sh.github.io',
+	// Hosted on Cloudflare Pages. Switch it to the custom domain once one is set up.
+	site: 'https://aashu10sh.pages.dev',
 	// Keep links to the old Zola site working. (Its feed at /blog/feed.xml is served by src/pages/blog/feed.xml.ts.)
 	redirects: {
 		'/blog': '/blogs',
