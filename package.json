@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.7",
@@ -22,5 +23,8 @@
     "lightense-images": "^1.0.17",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "wrangler": "4.161.0"
   }
 }
