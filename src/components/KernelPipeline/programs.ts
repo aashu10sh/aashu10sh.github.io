@@ -309,6 +309,6 @@ export function caption(mode: Mode, prog: Prog, step: number, verdict: boolean, 
 				return crashed
 					? 'The first execve() enters the loop and never leaves. That CPU stops scheduling anything else, and the watchdog eventually reports a soft lockup (compressed from ~20s here).'
 					: 'Waiting for the first execve()…';
-			return 'It works, just like the eBPF version. The difference is that nothing checked that it would.';
+			return 'It works. But nothing checked that it would: the kernel took this module on trust. Pick a buggy program above to see what that trust costs.';
 	}
 }

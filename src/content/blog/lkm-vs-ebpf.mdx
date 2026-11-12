@@ -5,7 +5,7 @@ description: "In this blog I dive into the various ways one might interact with 
 tags: ["tech", "linux"]
 ---
 
-import EbpfPipeline from '../../components/EbpfPipeline/EbpfPipeline.tsx';
+import KernelPipeline from '../../components/KernelPipeline/KernelPipeline.tsx';
 
 You want to run some code at the kernel mode ( ring 0 ), do you? 
 > When I say "kernel mode" I mean code running with kernel privileges, in kernel context with access to kernel memory. 
@@ -35,6 +35,8 @@ The biggest problem by far with Linux Kernel modules is that they could potentia
 
 Linux Kernel Modules also don't have a stable in-kernel API and an out-of-tree module can break with any kernel update and must be rebuilt for every version. This is why DKMS exists and why Nvidia, ZFS and Virtualbox run into problems after upgrading. Many Kernel symbols are also `EXPORT_SYMBOL_GPL` so only GPL-licensed modules can use them.
 
+<KernelPipeline mode="lkm" client:visible />
+
 ## eBPF
 eBPF stands for Extended Berkeley Packet filter and it is an extension to the classic BPF which was a tiny virtual machine for filtering packets ( fun fact: tcpdump uses BPF ). eBPF was introduced to the linux kernel in kernel 3.18, it moved to 64 bit registers and added maps, helper functions and many other hook types beyond just packets. Today, eBPF is more than just the packet filtering tool it was originally created to be, it does a lot of things.
 
@@ -49,7 +51,7 @@ This is how you would run an eBPF program:
 6. Your loader attaches it to a hook, where it runs every time it fires.
 7. You also write a user-space loader which communicates with its kernel space counterpart and exchanges information using maps or ring-buffers.
 
-<EbpfPipeline client:visible />
+<KernelPipeline mode="ebpf" client:visible />
 
 As you can see eBPF has better restrictions, better primitives and a really good ecosystem with tools like Tetragon and Cilium leading the way.
 

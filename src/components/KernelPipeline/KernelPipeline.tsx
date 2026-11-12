@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useId, useReducer, useRef, useState, type ReactNode } from 'react';
 import {
 	BAD_PC,
 	BYTECODE,
@@ -17,7 +17,7 @@ import {
 	type Mode,
 	type Prog,
 } from './programs';
-import './EbpfPipeline.css';
+import './KernelPipeline.css';
 
 /* ------------------------------------------------------------- geometry */
 
@@ -167,9 +167,14 @@ const freshSim = (): Sim => ({
 
 /* ------------------------------------------------------------- component */
 
-export default function EbpfPipeline() {
-	const [mode, setMode] = useState<Mode>('ebpf');
+/**
+ * Step-through diagram of getting code into the kernel, either as an eBPF program or as a
+ * kernel module. The post shows one of each, so `mode` is fixed per instance.
+ */
+export default function KernelPipeline({ mode }: { mode: Mode }) {
 	const [prog, setProg] = useState<Prog>('ok');
+	// Two diagrams share the page, so SVG ids must be unique per instance.
+	const arrowId = `kp-arrow-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
 	const [step, setStep] = useState(0);
 	const [playing, setPlaying] = useState(false);
 	const [, frame] = useReducer((n: number) => n + 1, 0);
@@ -193,8 +198,7 @@ export default function EbpfPipeline() {
 		setStep(s);
 	}, []);
 
-	const reset = (m: Mode, pr: Prog) => {
-		setMode(m);
+	const reset = (pr: Prog) => {
 		setProg(pr);
 		goto(0);
 		if (!reducedMotion.current) setPlaying(true);
@@ -411,16 +415,7 @@ export default function EbpfPipeline() {
 	return (
 		<figure className="ebpf-demo" ref={rootRef}>
 			<div className="eb-controls">
-				<Segmented
-					label="load as"
-					value={mode}
-					options={[
-						{ id: 'ebpf', label: 'eBPF program' },
-						{ id: 'lkm', label: 'kernel module' },
-					]}
-					onChange={(m) => reset(m as Mode, prog)}
-				/>
-				<Segmented label="program" value={prog} options={PROGS} onChange={(pr) => reset(mode, pr as Prog)} />
+				<Segmented label="program" value={prog} options={PROGS} onChange={(pr) => reset(pr as Prog)} />
 			</div>
 
 			<svg
@@ -430,7 +425,7 @@ export default function EbpfPipeline() {
 				aria-label={`Diagram of loading ${mode === 'ebpf' ? 'an eBPF program' : 'a kernel module'}, step ${step + 1} of 7: ${STEP_LABELS[mode][step]}`}
 			>
 				<defs>
-					<marker id="eb-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+					<marker id={arrowId} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
 						<path d="M0 0L8 4L0 8z" className="eb-arrowhead" />
 					</marker>
 				</defs>
@@ -453,7 +448,7 @@ export default function EbpfPipeline() {
 							key={name}
 							d={pathD(pts)}
 							className={`eb-path ${pathOn(name) ? 'on' : ''} ${name === 'reject' ? 'bad' : ''}`}
-							markerEnd="url(#eb-arrow)"
+							markerEnd={`url(#${arrowId})`}
 						/>
 					),
 				)}
