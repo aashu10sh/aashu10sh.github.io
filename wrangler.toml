@@ -1,0 +1,15 @@
+# Cloudflare Workers config. The site is fully static: this Worker has no script,
+# it only serves the files Astro builds into dist/.
+# Having this file also stops `wrangler deploy` from trying to auto-configure the
+# project (which would add the @astrojs/cloudflare SSR adapter).
+#
+# Workers Builds requires `name` to match the Worker's name in the dashboard.
+name = "aashu10sh"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./dist"
+# Astro writes pages as /path/index.html; serve them at /path/ and redirect /path -> /path/.
+html_handling = "auto-trailing-slash"
+# Serve Astro's dist/404.html (with a 404 status) for unknown paths.
+not_found_handling = "404-page"
