@@ -4,7 +4,7 @@
 # project (which would add the @astrojs/cloudflare SSR adapter).
 #
 # Workers Builds requires `name` to match the Worker's name in the dashboard.
-name = "aashu10sh"
+name = "blog"
 compatibility_date = "2026-11-01"
 
 [assets]
